@@ -1,2 +1,3 @@
 # the_game
-Will be renamed
+Will be renamed \
+Trust Me :)
