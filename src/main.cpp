@@ -1,23 +1,22 @@
 #include "../include/game.hpp"
 
-Game *game = nullptr;
+// Window Attributes
+const int WIDHT = 1920;
+const int HEIGHT = 1080;
+const char *TITLE = "the_game";
 
 int main(int argc, const char *argv[])
 {
+    Game game;
 
-    game = new Game();
+    SetTraceLogLevel(LOG_ERROR);
 
-    game->init("the_game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, false);
+    game.initwindow(WIDHT, HEIGHT, TITLE);
 
-    while (game->running())
+    SetTargetFPS(60);
+    while (!WindowShouldClose())
     {
-
-        game->handleEvents();
-        game->update();
-        game->render();
+        game.render();
     }
-
-    game->clean();
-
     return 0;
 }

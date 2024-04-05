@@ -3,9 +3,7 @@
 CXX := g++
 CCBUILDFLAGS := -o
 
-SDL_FLAGS := -lSDL2
-SDL_FLAGS += -lSDL2_image
-
+RFLAGS := -lraylib
 
 SRC_PATH := src
 INC_PATH := include
@@ -25,7 +23,7 @@ TARGET := $(TARGET_NAME)
 all: $(TARGET)
 
 $(TARGET): $(SRC) $(INC)
-	$(CXX) $(CCBUILDFLAGS) $@ $(SRC) $(SDL_FLAGS)
+	$(CXX) $(CCBUILDFLAGS) $@ $(SRC) $(RFLAGS)
 
 .PHONY: run
 run: all

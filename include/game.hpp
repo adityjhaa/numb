@@ -1,24 +1,16 @@
 #pragma once
 
-#include "SDL2/SDL.h"
+#include <raylib.h>
 
 class Game
 {
-
-    bool isRunning;
-    SDL_Window *window;
-    SDL_Renderer *renderer;
+    void draw();
 
 public:
     Game();
     ~Game();
 
-    void init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen);
+    void initwindow(int width, int height, const char *title);
 
-    void handleEvents();
-    void update();
     void render();
-    void clean();
-
-    bool running();
 };
