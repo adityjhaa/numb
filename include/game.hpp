@@ -1,10 +1,13 @@
 #pragma once
 
 #include <raylib.h>
+#include "character.hpp"
+#include <iostream>
 
 class Game
 {
-    void draw();
+    void draw(float dt);
+    Character *m;
 
 public:
     Game();
@@ -12,5 +15,9 @@ public:
 
     void initwindow(int width, int height, const char *title);
 
-    void render();
+    void startscreen(const char *name);
+
+    void addCharacter();
+
+    void render(float dt);
 };

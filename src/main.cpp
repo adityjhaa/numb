@@ -1,4 +1,5 @@
 #include "../include/game.hpp"
+#include <iostream>
 
 // Window Attributes
 const int WIDHT = 1920;
@@ -12,11 +13,14 @@ int main(int argc, const char *argv[])
     SetTraceLogLevel(LOG_ERROR);
 
     game.initwindow(WIDHT, HEIGHT, TITLE);
+    game.startscreen(TITLE);
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
-        game.render();
+        float dt = GetFrameTime();
+        // std::cout << dt << "\n";        
+        game.render(dt);
     }
     return 0;
 }
