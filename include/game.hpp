@@ -2,22 +2,21 @@
 
 #include <raylib.h>
 #include "character.hpp"
-#include <iostream>
 
 class Game
 {
-    void draw(float dt);
-    Character *m;
-
+    Character *player;
+    void loadplayer();
 public:
     Game();
     ~Game();
 
-    void initwindow(int width, int height, const char *title);
+    void init(int width, int height, const char *title);
 
     void startscreen(const char *name);
 
-    void addCharacter();
-
-    void render(float dt);
+    void render();
+    void update(float dt);
+    void end();
+    void close();
 };

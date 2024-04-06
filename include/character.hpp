@@ -1,24 +1,26 @@
 #pragma once
 
-#include "raylib.h"
+#include <raylib.h>
+#include <raymath.h>
+#include "texture.hpp"
 
 class Character
 {
+    Textures idle, run;
+    Textures texture;
+    Rectangle rec;
+    Vector2 pos, vel;
+    int frame, maxframes{11};
+    float speed{6.f}, scale{6.f};
+    float right_left{1.f};     // right : 1.0, left : -1.0
+    float updateTime, runningTime;
 
 public:
-    Texture2D tex;
-    Rectangle rec;
-    Vector2 pos;
-    int frame;
-    int noframes;
-    float updateTime, runningTime;
     Character();
-
+    Character(const char *path1, const char *path2);
     ~Character();
 
-    void loadTexture(const char *path);
+    void initchar(Vector2 pos, int frame, float updateTime, float runningTime);
 
-    void make(Vector2 pos, int frame, int noframes, float updateTime, float runningTime);
-
-    void unloadTexture();
+    void updatechar(float dt);
 };
