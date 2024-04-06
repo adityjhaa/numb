@@ -11,8 +11,8 @@ Character::Character(const char *path1, const char *path2)
     run.load(path2);
     texture = idle;
 
-    width = static_cast<int>(texture.getTexture().width / 11.f);
-    height = static_cast<int>(texture.getTexture().height);
+    width = static_cast<float>(texture.getTexture().width / 11.f);
+    height = static_cast<float>(texture.getTexture().height);
 }
 
 Character::~Character()
@@ -73,6 +73,11 @@ void Character::updatechar(float dt)
     }
 
     Rectangle source{frame * width, 0.f, right_left * width, height};
-    Rectangle dest{pos.x, pos.y, scale * width, scale * height};
+    Rectangle dest{896.f, 476.f, scale * width, scale * height};
     DrawTexturePro(texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
+}
+
+Vector2 Character::getpos()
+{
+    return pos;
 }

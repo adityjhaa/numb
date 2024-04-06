@@ -28,19 +28,28 @@ void Game::startscreen(const char *name)
         }
         EndDrawing();
     }
+    loadmap();
     loadplayer();
 }
 
 void Game::loadplayer()
 {
     player = new Character("assets/main_char/Idle.png", "assets/main_char/Run.png");
-    player->initchar(Vector2{100.f, 100.f}, 0, 1.0 / 12.0, 0.f);
+    player->initchar(Vector2{896.f, 476.f}, 0, 1.0 / 15.0, 0.f);
+}
+
+void Game::loadmap()
+{
+    map.load("assets/map.png");
+    mapsrc= {0, 0, (float)map.getTexture().width, (float)map.getTexture().height};
+    mapdest = {0, 0, (float)map.getTexture().width* 2, (float)map.getTexture().height * 2};
 }
 
 void Game::render()
 {
     BeginDrawing();
     ClearBackground(WHITE);
+    DrawTexturePro(map.getTexture(), mapsrc, mapdest, Vector2{player->getpos().x - 960.f, player->getpos().y - 540.f}, 0.0, WHITE);
 }
 
 void Game::update(float dt)
@@ -55,5 +64,6 @@ void Game::end()
 
 void Game::close()
 {
+    map.unload();
     CloseWindow();
 }

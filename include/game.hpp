@@ -6,7 +6,10 @@
 class Game
 {
     Character *player;
+    Textures map;
+    Rectangle mapsrc, mapdest;
     void loadplayer();
+    void loadmap();
 
 public:
     Game();
