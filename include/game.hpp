@@ -7,6 +7,7 @@ class Game
 {
     Character *player;
     void loadplayer();
+
 public:
     Game();
     ~Game();

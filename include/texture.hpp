@@ -4,7 +4,7 @@
 
 class Textures
 {
-    const char* path;
+    const char *path;
     Texture2D texture;
 
 public:

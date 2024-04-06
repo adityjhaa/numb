@@ -10,6 +10,9 @@ Character::Character(const char *path1, const char *path2)
     idle.load(path1);
     run.load(path2);
     texture = idle;
+
+    width = static_cast<int>(texture.getTexture().width / 11.f);
+    height = static_cast<int>(texture.getTexture().height);
 }
 
 Character::~Character()
@@ -69,7 +72,7 @@ void Character::updatechar(float dt)
         frame = frame % maxframes;
     }
 
-    Rectangle source{(float)(frame * texture.getTexture().width)/maxframes, 0.f, (float)(right_left * texture.getTexture().width)/maxframes, (float)texture.getTexture().height};
-    Rectangle dest{pos.x, pos.y, (float)(scale * texture.getTexture().width)/maxframes, (float)(scale * texture.getTexture().height)};
+    Rectangle source{frame * width, 0.f, right_left * width, height};
+    Rectangle dest{pos.x, pos.y, scale * width, scale * height};
     DrawTexturePro(texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }

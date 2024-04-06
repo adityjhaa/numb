@@ -12,8 +12,9 @@ class Character
     Vector2 pos, vel;
     int frame, maxframes{11};
     float speed{6.f}, scale{6.f};
-    float right_left{1.f};     // right : 1.0, left : -1.0
+    float right_left{1.f}; // right : 1.0, left : -1.0
     float updateTime, runningTime;
+    float width, height;
 
 public:
     Character();

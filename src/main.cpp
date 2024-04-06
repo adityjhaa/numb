@@ -17,12 +17,12 @@ int main(int argc, const char *argv[])
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
-        float dt = GetFrameTime();    
+        float dt = GetFrameTime();
         game.render();
         game.update(dt);
         game.end();
     }
     game.close();
-    
+
     return 0;
 }
