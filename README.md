@@ -1,8 +1,22 @@
 # the_game
-Will be renamed \
-Trust Me :)
+<hr>
 
-### Build and run:
+**Clone Repo**
+```bash
+git clone https://github.com/adityjha0/the_game.git
+```
+<br>
+
+**Install Raylib**
+```bash
+cp install.sh ~
+cd
+chmod +x install.sh
+./install.sh
+```
+<br>
+
+**Build and run**
 ```bash
 make run
 ```
