@@ -28,19 +28,19 @@ void Character::initchar(Vector2 pos, int frame, float updateTime, float running
 
 void Character::updatechar(float dt)
 {
-    if (IsKeyDown(KEY_A) or IsKeyDown(KEY_LEFT))
+    if (IsKeyDown(KEY_A))
     {
         vel.x -= 1.0;
     }
-    if (IsKeyDown(KEY_S) or IsKeyDown(KEY_DOWN))
+    if (IsKeyDown(KEY_S))
     {
         vel.y += 1.0;
     }
-    if (IsKeyDown(KEY_D) or IsKeyDown(KEY_RIGHT))
+    if (IsKeyDown(KEY_D))
     {
         vel.x += 1.0;
     }
-    if (IsKeyDown(KEY_W) or IsKeyDown(KEY_UP))
+    if (IsKeyDown(KEY_W))
     {
         vel.y -= 1.0;
     }
