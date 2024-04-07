@@ -18,7 +18,6 @@ int main(int argc, const char *argv[])
     while (!WindowShouldClose())
     {
         float dt = GetFrameTime();
-        game.render();
         game.update(dt);
         game.end();
     }

@@ -1,20 +1,11 @@
 #pragma once
 
 #include <raylib.h>
-#include "character.hpp"
-#include "map.hpp"
+#include "lvl1.hpp"
 
 class Game
 {
-    Character *player;
-    Map *map;
-
-    std::pair<bool, bool> movecamera{};
-    std::pair<int, int> cameramovement;
-    float camx{}, camy{};
-
-    void loadplayer();
-    void loadmap();
+    Level1 *lvl1;
 
 public:
     Game();
@@ -24,7 +15,6 @@ public:
 
     void startscreen(const char *name);
 
-    void render();
     void update(float dt);
     void end();
     void close();
