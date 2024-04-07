@@ -35,21 +35,38 @@ void Game::startscreen(const char *name)
 void Game::loadplayer()
 {
     player = new Character("assets/main_char/Idle.png", "assets/main_char/Run.png");
-    player->initchar(Vector2{896.f, 476.f}, 0, 1.0 / 15.0, 0.f);
+    player->initchar(Vector2{250.f, 250.f}, 0, 1.0 / 15.0, 0.f);
 }
 
 void Game::loadmap()
 {
     map.load("assets/map.png");
-    mapsrc= {0, 0, (float)map.getTexture().width, (float)map.getTexture().height};
-    mapdest = {0, 0, (float)map.getTexture().width* 2, (float)map.getTexture().height * 2};
+    mapsrc = {0, 0, (float)map.getTexture().width, (float)map.getTexture().height};
+    mapdest = {0, 0, (float)map.getTexture().width * 4, (float)map.getTexture().height * 4};
 }
 
 void Game::render()
 {
+    movecamera = player->movecamera();
+    movecamera.first ? cameramovement.first = 1 : cameramovement.first = 0;
+    movecamera.second ? cameramovement.second = 1 : cameramovement.second = 0;
+
     BeginDrawing();
     ClearBackground(WHITE);
-    DrawTexturePro(map.getTexture(), mapsrc, mapdest, Vector2{player->getpos().x - 960.f, player->getpos().y - 540.f}, 0.0, WHITE);
+
+    camx = (player->getpos().x - 896.f) * cameramovement.first;
+    camy = (player->getpos().y - 476.f) * cameramovement.second;
+
+    if (!movecamera.first and (player->getpos().x > 1000.f))
+    {
+        camx = 1920.f;
+    }
+    if (!movecamera.second and (player->getpos().y > 1000.f))
+    {
+        camy = 2760.f;
+    }
+
+    DrawTexturePro(map.getTexture(), mapsrc, mapdest, Vector2{camx, camy}, 0.0, WHITE);
 }
 
 void Game::update(float dt)

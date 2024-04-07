@@ -1,4 +1,5 @@
 #include "../include/character.hpp"
+#include <iostream>
 
 Character::Character()
 {
@@ -72,12 +73,26 @@ void Character::updatechar(float dt)
         frame = frame % maxframes;
     }
 
+    (pos.x >= 896.f and pos.x <= 2816.f) ? shouldstay.first = true : shouldstay.first = false;
+    (pos.y >= 476.f and pos.y <= 3236.f) ? shouldstay.second = true : shouldstay.second = false;
+
+    shouldstay.first ? xpos = 896.f : xpos = pos.x;
+    shouldstay.second ? ypos = 476.f : ypos = pos.y;
+
+    if(pos.x > 2816.f) {xpos = pos.x - 1920;}
+    if(pos.y > 3236.f) {ypos = pos.y - 2760;}
+
     Rectangle source{frame * width, 0.f, right_left * width, height};
-    Rectangle dest{896.f, 476.f, scale * width, scale * height};
+    Rectangle dest{xpos, ypos, scale * width, scale * height};
     DrawTexturePro(texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }
 
 Vector2 Character::getpos()
 {
     return pos;
+}
+
+std::pair<bool, bool> Character::movecamera()
+{
+    return shouldstay;
 }

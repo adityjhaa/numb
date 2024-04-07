@@ -8,6 +8,11 @@ class Game
     Character *player;
     Textures map;
     Rectangle mapsrc, mapdest;
+
+    std::pair<bool, bool> movecamera{};
+    std::pair<int, int> cameramovement;
+    float camx{}, camy{};
+
     void loadplayer();
     void loadmap();
 
