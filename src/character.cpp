@@ -79,8 +79,11 @@ void Character::updatechar(float dt)
     shouldstay.first ? xpos = 896.f : xpos = pos.x;
     shouldstay.second ? ypos = 476.f : ypos = pos.y;
 
-    if(pos.x > 2816.f) {xpos = pos.x - 1920;}
-    if(pos.y > 3236.f) {ypos = pos.y - 2760;}
+    if (pos.x > 2816.f)
+        xpos = pos.x - 1920;
+
+    if (pos.y > 3236.f)
+        ypos = pos.y - 2760;
 
     Rectangle source{frame * width, 0.f, right_left * width, height};
     Rectangle dest{xpos, ypos, scale * width, scale * height};

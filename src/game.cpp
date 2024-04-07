@@ -4,6 +4,7 @@ Game::Game() {}
 
 Game::~Game()
 {
+    map = nullptr;
     player = nullptr;
 }
 
@@ -40,9 +41,7 @@ void Game::loadplayer()
 
 void Game::loadmap()
 {
-    map.load("assets/map.png");
-    mapsrc = {0, 0, (float)map.getTexture().width, (float)map.getTexture().height};
-    mapdest = {0, 0, (float)map.getTexture().width * 4, (float)map.getTexture().height * 4};
+    map = new Map("assets/map.png");
 }
 
 void Game::render()
@@ -66,7 +65,7 @@ void Game::render()
         camy = 2760.f;
     }
 
-    DrawTexturePro(map.getTexture(), mapsrc, mapdest, Vector2{camx, camy}, 0.0, WHITE);
+    map->drawmap(Vector2{camx, camy});
 }
 
 void Game::update(float dt)
@@ -81,6 +80,5 @@ void Game::end()
 
 void Game::close()
 {
-    map.unload();
     CloseWindow();
 }

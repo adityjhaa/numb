@@ -2,12 +2,12 @@
 
 #include <raylib.h>
 #include "character.hpp"
+#include "map.hpp"
 
 class Game
 {
     Character *player;
-    Textures map;
-    Rectangle mapsrc, mapdest;
+    Map *map;
 
     std::pair<bool, bool> movecamera{};
     std::pair<int, int> cameramovement;
