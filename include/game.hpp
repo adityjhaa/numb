@@ -2,10 +2,12 @@
 
 #include <raylib.h>
 #include "lvl1.hpp"
+#include "lvl2.hpp"
 
 class Game
 {
     Level1 *lvl1;
+    Level2 *lvl2;
 
 public:
     Game();

@@ -28,5 +28,5 @@ public:
     Rectangle getrec();
     void undomove();
     std::pair<bool, bool> movecamera();
-    void updatechar(float dt);
+    void updatechar(float dt, int level);
 };
