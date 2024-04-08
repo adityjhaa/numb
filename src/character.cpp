@@ -29,25 +29,34 @@ void Character::initchar(Vector2 pos, int frame, float updateTime, float running
     this->runningTime = runningTime;
 }
 
-void Character::updatechar(float dt)
+void Character::updatechar(float dt, int level)
 {
     lastframe = pos;
-    if (IsKeyDown(KEY_A))
+    if (IsKeyDown(KEY_A) and (level == 1 || level == 2))
     {
-        vel.x -= 1.0;
+        vel.x = -1.0;
     }
-    if (IsKeyDown(KEY_S))
+    if (IsKeyDown(KEY_S) and (level == 1))
     {
-        vel.y += 1.0;
+        vel.y = 1.0;
     }
-    if (IsKeyDown(KEY_D))
+    if (IsKeyDown(KEY_D) and (level == 1 || level == 2))
     {
-        vel.x += 1.0;
+        vel.x = 1.0;
     }
-    if (IsKeyDown(KEY_W))
+    if (IsKeyDown(KEY_W) and (level == 1))
     {
-        vel.y -= 1.0;
+        vel.y = -1.0;
     }
+    if (IsKeyPressed(KEY_SPACE) and (level == 2))
+    {
+        vel.x = 0.707;
+        vel.y = -0.707;
+    }
+    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_S) || IsKeyReleased(KEY_D) || IsKeyReleased(KEY_W))
+        vel = {};
+    if (level == 2)
+        vel.y += .05;
 
     if (Vector2Length(vel) != 0.0)
     {
@@ -64,7 +73,7 @@ void Character::updatechar(float dt)
         texture = idle;
         maxframes = 11;
     }
-    vel = {};
+    // vel = {};
 
     runningTime += dt;
     if (runningTime >= updateTime)

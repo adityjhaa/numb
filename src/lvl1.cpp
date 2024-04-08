@@ -22,7 +22,7 @@ void Level1::loadplayer()
 
 void Level1::loadmap()
 {
-    map = new Map("assets/map.png");
+    map = new Map("assets/map1.png");
 }
 
 void Level1::render()
@@ -51,7 +51,7 @@ void Level1::render()
 
 void Level1::update(float dt)
 {
-    player->updatechar(dt);
+    player->updatechar(dt, 1);
     for (auto c : colliders)
     {
         if (CheckCollisionRecs(player->getrec(), c))
