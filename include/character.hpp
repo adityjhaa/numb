@@ -9,7 +9,7 @@ class Character
     Textures idle, run;
     Textures texture;
     Rectangle rec;
-    Vector2 pos, vel;
+    Vector2 pos, vel, lastframe;
     float xpos{}, ypos{};
     int frame, maxframes{11};
     std::pair<bool, bool> shouldstay{};
@@ -25,6 +25,8 @@ public:
 
     void initchar(Vector2 pos, int frame, float updateTime, float runningTime);
     Vector2 getpos();
+    Rectangle getrec();
+    void undomove();
     std::pair<bool, bool> movecamera();
     void updatechar(float dt);
 };

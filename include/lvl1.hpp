@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "map.hpp"
 #include "character.hpp"
 
@@ -14,6 +15,9 @@ class Level1
 
     void loadplayer();
     void loadmap();
+
+    std::vector<Rectangle> colliders;
+    void addcolliders();
 
 public:
     Level1();
