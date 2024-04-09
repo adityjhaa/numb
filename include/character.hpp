@@ -6,6 +6,7 @@
 
 class Character
 {
+protected:
     Textures idle, run;
     Textures texture;
     Rectangle rec;
@@ -24,9 +25,8 @@ public:
     ~Character();
 
     void initchar(Vector2 pos, int frame, float updateTime, float runningTime);
-    Vector2 getpos();
-    Rectangle getrec();
-    void undomove();
-    std::pair<bool, bool> movecamera();
-    void updatechar(float dt, int level);
+
+    friend class Level;
+    friend class Level1;
+    friend class Level2;
 };

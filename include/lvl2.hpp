@@ -1,33 +1,18 @@
 #pragma once
 
-#include <vector>
-#include "map.hpp"
-#include "character.hpp"
-#include "texture.hpp"
+#include "level.hpp"
 
-class Level2
+class Level2 : public Level
 {
-    Textures *texture;
-    Character *player;
-    Map *map;
-
-
-    std::pair<bool, bool> movecamera{};
-    std::pair<int, int> cameramovement;
     int droppable_score{};
     float camx{}, camy{};
 
-    void loadplayer();
-    void droppables();
-    void loadmap();
+    virtual void loadmap() override;
 
-    std::vector<Rectangle> colliders;
-    void addcolliders();
+    // virtual void addcolliders() override;
+    virtual void updatechar(float dt) override;
 
 public:
     Level2();
     ~Level2();
-
-    void render();
-    void update(float dt);
 };

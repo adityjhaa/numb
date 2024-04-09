@@ -29,7 +29,7 @@ void Game::startscreen(const char *name)
         }
         EndDrawing();
     }
-    lvl1 = new Level1();
+    // lvl1 = new Level1();
     lvl2 = new Level2();
 
 }
