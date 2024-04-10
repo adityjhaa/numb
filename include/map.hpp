@@ -6,13 +6,12 @@ class Map
 {
     Textures map;
     Texture2D tex;
-    float scale{4.f};
     Rectangle src, dest;
 
 public:
     Map();
     ~Map();
 
-    Map(const char *path);
+    Map(const char *path, float scale);
     void drawmap(Vector2 mappos);
 };

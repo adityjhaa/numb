@@ -7,7 +7,7 @@ Map::~Map()
     map.unload();
 }
 
-Map::Map(const char *path)
+Map::Map(const char *path, float scale)
 {
     map.load(path);
     tex = map.getTexture();

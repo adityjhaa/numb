@@ -14,7 +14,7 @@ Level2::~Level2()
 
 void Level2::loadmap()
 {
-    map = new Map("assets/map2.png");
+    map = new Map("assets/map2.png", 4.f);
 }
 
 void Level2::updatechar(float dt)

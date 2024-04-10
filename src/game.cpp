@@ -29,17 +29,17 @@ void Game::startscreen(const char *name)
         }
         EndDrawing();
     }
-    // lvl1 = new Level1();
-    lvl2 = new Level2();
+    lvl1 = new Level1();
+    // lvl2 = new Level2();
 
 }
 
 void Game::update(float dt)
 {
-    // lvl1->render();
-    // lvl1->update(dt);
-    lvl2->render();
-    lvl2->update(dt);
+    lvl1->render();
+    lvl1->update(dt);
+    // lvl2->render();
+    // lvl2->update(dt);
 }
 
 void Game::end()
