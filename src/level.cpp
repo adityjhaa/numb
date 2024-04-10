@@ -52,3 +52,5 @@ void Level::update(float dt)
 void Level::addcolliders() {}
 
 void Level::updatechar(float dt) {}
+
+bool Level::complete() {return false;}

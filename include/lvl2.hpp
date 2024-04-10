@@ -9,10 +9,11 @@ class Level2 : public Level
 
     virtual void loadmap() override;
 
-    // virtual void addcolliders() override;
+    virtual void addcolliders() override;
     virtual void updatechar(float dt) override;
 
 public:
     Level2();
     ~Level2();
+    virtual bool complete() override;
 };

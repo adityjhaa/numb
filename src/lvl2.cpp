@@ -14,30 +14,22 @@ Level2::~Level2()
 
 void Level2::loadmap()
 {
-    map = new Map("assets/map2.png", 4.f);
+    map = new Map("assets/maps/map2.png", 4.f);
 }
 
 void Level2::updatechar(float dt)
 {
+    player->vel.y += .05;
     player->lastframe = player->pos;
     if (IsKeyDown(KEY_A))
         player->vel.x = -1.0;
-    if (IsKeyDown(KEY_S))
-        player->vel.y = 1.0;
     if (IsKeyDown(KEY_D))
         player->vel.x = 1.0;
-    if (IsKeyDown(KEY_W))
-        player->vel.y = -1.0;
-
     if (IsKeyPressed(KEY_SPACE))
-    {
-        player->vel.x = 0.707;
-        player->vel.y = -0.707;
-    }
-    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_S) || IsKeyReleased(KEY_D) || IsKeyReleased(KEY_W))
-        player->vel = {};
+        player->vel.y = -1.f;
 
-    player->vel.y += .05;
+    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_D))
+        player->vel = {};
 
     if (Vector2Length(player->vel) != 0.0)
     {
@@ -81,3 +73,7 @@ void Level2::updatechar(float dt)
     Rectangle dest{player->xpos, player->ypos, player->scale * player->width, player->scale * player->height};
     DrawTexturePro(player->texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }
+
+void Level2::addcolliders() {}
+
+bool Level2::complete() { return false; }

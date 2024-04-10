@@ -17,6 +17,8 @@ protected:
     void loadplayer();
     virtual void loadmap();
 
+    bool finish;
+
     std::vector<Rectangle> colliders;
     virtual void addcolliders();
     
@@ -28,4 +30,5 @@ public:
 
     virtual void render();
     virtual void update(float dt);
+    virtual bool complete();
 };

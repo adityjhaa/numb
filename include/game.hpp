@@ -8,6 +8,7 @@ class Game
 {
     Level1 *lvl1;
     Level2 *lvl2;
+    int currLevel;
 
 public:
     Game();

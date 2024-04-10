@@ -1,6 +1,9 @@
 #include "../include/game.hpp"
 
-Game::Game() {}
+Game::Game()
+{
+    currLevel = 0;
+}
 
 Game::~Game()
 {
@@ -30,16 +33,27 @@ void Game::startscreen(const char *name)
         EndDrawing();
     }
     lvl1 = new Level1();
-    // lvl2 = new Level2();
-
+    lvl2 = new Level2();
+    currLevel = 1;
 }
 
 void Game::update(float dt)
 {
-    lvl1->render();
-    lvl1->update(dt);
-    // lvl2->render();
-    // lvl2->update(dt);
+    switch(currLevel)
+    {
+        case 1:
+            lvl1->render();
+            lvl1->update(dt);
+            if(lvl1->complete()) { currLevel++; }
+            break;
+        case 2:
+            lvl2->render();
+            lvl2->update(dt);
+            if(lvl2->complete()) { currLevel++; }
+            break;
+        default:
+            break;
+    }
 }
 
 void Game::end()

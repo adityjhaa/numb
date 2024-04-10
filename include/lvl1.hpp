@@ -12,4 +12,5 @@ protected:
 public:
     Level1();
     ~Level1();
+    virtual bool complete() override;
 };
