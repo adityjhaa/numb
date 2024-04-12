@@ -18,6 +18,7 @@ public:
 
     void startscreen(const char *name);
 
+    void begin();
     void update(float dt);
     void end();
     void close();

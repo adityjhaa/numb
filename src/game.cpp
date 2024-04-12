@@ -37,6 +37,12 @@ void Game::startscreen(const char *name)
     currLevel = 1;
 }
 
+void Game::begin()
+{
+    BeginDrawing();
+    ClearBackground(WHITE);
+}
+
 void Game::update(float dt)
 {
     switch(currLevel)
