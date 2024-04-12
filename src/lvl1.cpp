@@ -5,12 +5,14 @@ Level1::Level1()
     loadplayer();
     loadmap();
     addcolliders();
+    s = LoadSound("assets/sounds/nothing.mp3");
 }
 
 Level1::~Level1()
 {
     player = nullptr;
     map = nullptr;
+    UnloadSound(s);
 }
 
 void Level1::loadmap()
@@ -21,7 +23,14 @@ void Level1::loadmap()
 void Level1::updatechar(float dt)
 {
 
-    if((player->pos.x > 2950.f) and (player->pos.y > 3300.f)){ finish = true; }
+    if ((player->pos.x > 2950.f) and (player->pos.y > 3300.f))
+    {
+        finish = true;
+        if (first)
+            PlaySound(s);
+        
+        first = false;
+    }
 
     player->lastframe = player->pos;
     if (IsKeyDown(KEY_A))

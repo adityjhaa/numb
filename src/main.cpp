@@ -14,6 +14,7 @@ int main(int argc, const char *argv[])
     Game game;
 
     game.init(WIDTH, HEIGHT, TITLE);
+    InitAudioDevice();
     game.startscreen(TITLE);
 
     SetExitKey(KEY_NULL);
@@ -42,6 +43,7 @@ int main(int argc, const char *argv[])
         game.end();
     }
     game.close();
+    CloseAudioDevice();
 
     return 0;
 }
