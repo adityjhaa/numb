@@ -3,7 +3,8 @@
 // Window Attributes
 const int WIDTH = 1920;
 const int HEIGHT = 1080;
-const char *TITLE = "the_game";
+const char *title = "numb";
+const char *TITLE = "NUMB";
 
 const char *exitText = "Are you sure you want to exit program? [Y/N]";
 
@@ -13,7 +14,7 @@ int main(int argc, const char *argv[])
 
     Game game;
 
-    game.init(WIDTH, HEIGHT, TITLE);
+    game.init(WIDTH, HEIGHT, title);
     InitAudioDevice();
     game.startscreen(TITLE);
 
@@ -23,20 +24,25 @@ int main(int argc, const char *argv[])
     SetTargetFPS(60);
     while (!exitWindow)
     {
-        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) exitWindowRequest = true;
-        if(exitWindowRequest)
+        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
+            exitWindowRequest = true;
+        if (exitWindowRequest)
         {
-            if (IsKeyPressed(KEY_Y)) exitWindow = true;
-            else if (IsKeyPressed(KEY_N)) exitWindowRequest = false;
+            if (IsKeyPressed(KEY_Y))
+                exitWindow = true;
+            else if (IsKeyPressed(KEY_N))
+                exitWindowRequest = false;
         }
 
         game.begin();
 
-        if(exitWindowRequest)
+        if (exitWindowRequest)
         {
-            DrawRectangle(0, 400, WIDTH, 280, BLACK);
+            ClearBackground(DARKGRAY);
             DrawText(exitText, 240, 500, 60, LIGHTGRAY);
-        }else{
+        }
+        else
+        {
             float dt = GetFrameTime();
             game.update(dt);
         }

@@ -1,9 +1,9 @@
-# the_game
+# NUMB
 <hr>
 
 **Clone Repo**
 ```bash
-git clone https://github.com/adityjha0/the_game.git
+git clone https://github.com/adityjha0/numb.git
 ```
 <br>
 
