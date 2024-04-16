@@ -3,9 +3,13 @@
 #include <raylib.h>
 #include "lvl1.hpp"
 #include "lvl2.hpp"
+#include "home.hpp"
+#include "menu.hpp"
 
 class Game
 {
+    Menu *menu;
+    Home *home;
     Level1 *lvl1;
     Level2 *lvl2;
     int currLevel;

@@ -2,11 +2,13 @@
 
 Game::Game()
 {
-    currLevel = 0;
+    currLevel = -1;
 }
 
 Game::~Game()
 {
+    menu = nullptr;
+    home = nullptr;
     lvl1 = nullptr;
     lvl2 = nullptr;
 }
@@ -33,9 +35,10 @@ void Game::startscreen()
         EndDrawing();
     }
     startsc.unload();
+    menu = new Menu();
+    home = new Home();
     lvl1 = new Level1();
     lvl2 = new Level2();
-    currLevel = 1;
 }
 
 void Game::begin()
@@ -46,9 +49,37 @@ void Game::begin()
 
 void Game::update(float dt)
 {
-
     switch (currLevel)
     {
+    case -1:
+        menu->render();
+        menu->update(dt);
+
+        if (IsKeyPressed(KEY_P))
+        {
+            currLevel = 0;
+        }
+        else if (IsKeyPressed(KEY_T))
+        {
+            // turtorial
+        }
+        else if (IsKeyPressed(KEY_E))
+        {
+            // exit
+        }
+        else if (IsKeyPressed(KEY_M))
+        {
+            // mute
+        }
+        break;
+    case 0:
+        home->render();
+        home->update(dt);
+        if (IsKeyPressed(KEY_P))
+            currLevel = -1;
+
+        break;
+
     case 1:
         if (instruction)
         {
@@ -62,7 +93,8 @@ void Game::update(float dt)
         lvl1->update(dt);
         if (lvl1->complete())
         {
-            currLevel++;
+            home->currmap++;
+            currLevel = 0;
             instruction = false;
         }
 
@@ -71,7 +103,11 @@ void Game::update(float dt)
         lvl2->render();
         lvl2->update(dt);
         if (lvl2->complete())
-            currLevel++;
+        {
+            home->currmap++;
+            currLevel = 0;
+            instruction = false;
+        }
 
         break;
     default:
