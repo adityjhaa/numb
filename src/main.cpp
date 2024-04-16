@@ -24,14 +24,17 @@ int main(int argc, const char *argv[])
     SetTargetFPS(60);
     while (!exitWindow)
     {
-        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
+        if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) || game.exit)
             exitWindowRequest = true;
         if (exitWindowRequest)
         {
             if (IsKeyPressed(KEY_Y))
                 exitWindow = true;
             else if (IsKeyPressed(KEY_N))
+            {
                 exitWindowRequest = false;
+                game.exit = false;
+            }
         }
 
         game.begin();

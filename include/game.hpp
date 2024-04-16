@@ -13,12 +13,15 @@ class Game
     Level1 *lvl1;
     Level2 *lvl2;
     int currLevel;
+    bool mute{};
 
-    bool instruction = true;
+    bool instruction[4] = {true, true, true, true};
 
 public:
     Game();
     ~Game();
+
+    bool exit{};
 
     void init(int width, int height, const char *title);
 

@@ -27,6 +27,9 @@ public:
     void initchar(Vector2 pos, int frame, float updateTime, float runningTime);
 
     friend class Level;
+    friend class Home;
     friend class Level1;
     friend class Level2;
+    friend class Level3;
+    friend class Level4;
 };

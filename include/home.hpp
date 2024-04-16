@@ -9,7 +9,8 @@ class Home : public Level
 
 protected:
 
-    // virtual void addcolliders() override;
+    virtual void loadplayer();
+    virtual void addcolliders() override;
     virtual void updatechar(float dt) override;
 
 public:

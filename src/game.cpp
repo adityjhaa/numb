@@ -65,11 +65,11 @@ void Game::update(float dt)
         }
         else if (IsKeyPressed(KEY_E))
         {
-            // exit
+            exit = true;
         }
         else if (IsKeyPressed(KEY_M))
         {
-            // mute
+            mute = !mute;
         }
         break;
     case 0:
@@ -81,11 +81,11 @@ void Game::update(float dt)
         break;
 
     case 1:
-        if (instruction)
+        if (instruction[0])
         {
             lvl1->instr();
             if (IsKeyPressed(KEY_SPACE))
-                instruction = false;
+                instruction[0] = false;
 
             return;
         }
@@ -93,21 +93,65 @@ void Game::update(float dt)
         lvl1->update(dt);
         if (lvl1->complete())
         {
-            home->currmap++;
+            if (home->currmap == 1)
+                home->currmap = 2;
             currLevel = 0;
-            instruction = false;
         }
 
         break;
     case 2:
+        if (instruction[1])
+        {
+            lvl1->instr();
+            if (IsKeyPressed(KEY_SPACE))
+                instruction[1] = false;
+
+            return;
+        }
         lvl2->render();
         lvl2->update(dt);
         if (lvl2->complete())
         {
-            home->currmap++;
+            if (home->currmap == 2)
+                home->currmap = 3;
             currLevel = 0;
-            instruction = false;
         }
+
+        break;
+    case 3:
+        // if (instruction[2])
+        // {
+        //     lvl3->instr();
+        //     if (IsKeyPressed(KEY_SPACE))
+        //         instruction[2] = false;
+
+        //     return;
+        // }
+        // lvl3->render();
+        // lvl3->update(dt);
+        // if (lvl3->complete())
+        // {
+        //     if (home->currmap == 3)
+        //         home->currmap = 4;
+        //     currLevel = 0;
+        // }
+
+        break;
+    case 4:
+        // if (instruction[3])
+        // {
+        //     lvl3->instr();
+        //     if (IsKeyPressed(KEY_SPACE))
+        //         instruction[3] = false;
+
+        //     return;
+        // }
+        // lvl3->render();
+        // lvl3->update(dt);
+        // if (lvl3->complete())
+        // {
+        //     currLevel = 0;
+        // }
 
         break;
     default:
