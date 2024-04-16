@@ -7,17 +7,17 @@ class Home : public Level
     void loadmaps();
     void unloadmaps();
 
-protected:
+    void entries();
 
+protected:
     virtual void loadplayer();
-    virtual void addcolliders() override;
     virtual void updatechar(float dt) override;
 
 public:
     Home();
     ~Home();
     int currmap = 0;
-
+    int pressed = 0;
     virtual void render() override;
     virtual void update(float dt) override;
 };

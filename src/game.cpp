@@ -78,8 +78,10 @@ void Game::update(float dt)
         if (IsKeyPressed(KEY_P))
             currLevel = -1;
 
-        break;
+        if (IsKeyPressed(KEY_ENTER))
+            currLevel = home->pressed;
 
+        break;
     case 1:
         if (instruction[0])
         {
@@ -93,8 +95,8 @@ void Game::update(float dt)
         lvl1->update(dt);
         if (lvl1->complete())
         {
-            if (home->currmap == 1)
-                home->currmap = 2;
+            if (home->currmap == 0)
+                home->currmap = 1;
             currLevel = 0;
         }
 
@@ -112,8 +114,8 @@ void Game::update(float dt)
         lvl2->update(dt);
         if (lvl2->complete())
         {
-            if (home->currmap == 2)
-                home->currmap = 3;
+            if (home->currmap == 1)
+                home->currmap = 2;
             currLevel = 0;
         }
 
@@ -131,8 +133,8 @@ void Game::update(float dt)
         // lvl3->update(dt);
         // if (lvl3->complete())
         // {
-        //     if (home->currmap == 3)
-        //         home->currmap = 4;
+        //     if (home->currmap == 2)
+        //         home->currmap = 3;
         //     currLevel = 0;
         // }
 
