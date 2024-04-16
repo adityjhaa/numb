@@ -1,8 +1,5 @@
 #include "../include/game.hpp"
 
-#define PGREEN \
-    (Color) { 150, 255, 30, 255 }
-
 Game::Game()
 {
     currLevel = 0;
@@ -19,22 +16,23 @@ void Game::init(int width, int height, const char *title)
     InitWindow(width, height, title);
 }
 
-void Game::startscreen(const char *name)
+void Game::startscreen()
 {
     bool start{false};
+    Textures startsc;
+    startsc.load("assets/pages/start.png");
     while ((!start) && (!WindowShouldClose()))
     {
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawText(name, 848, 460, 80, PGREEN);
-
-        DrawText("<SPACE>", 870, 800, 40, RED);
+        DrawTexture(startsc.getTexture(), 0, 0, WHITE);
         if (IsKeyPressed(KEY_SPACE))
         {
             start = true;
         }
         EndDrawing();
     }
+    startsc.unload();
     lvl1 = new Level1();
     lvl2 = new Level2();
     currLevel = 1;
@@ -48,13 +46,25 @@ void Game::begin()
 
 void Game::update(float dt)
 {
+
     switch (currLevel)
     {
     case 1:
+        if (instruction)
+        {
+            lvl1->instr();
+            if (IsKeyPressed(KEY_SPACE))
+                instruction = false;
+
+            return;
+        }
         lvl1->render();
         lvl1->update(dt);
         if (lvl1->complete())
+        {
             currLevel++;
+            instruction = false;
+        }
 
         break;
     case 2:

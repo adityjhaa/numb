@@ -2,6 +2,7 @@
 
 Level1::Level1()
 {
+    loadinstr();
     loadplayer();
     loadmap();
     addcolliders();
@@ -10,6 +11,7 @@ Level1::Level1()
 
 Level1::~Level1()
 {
+    instpage.unload();
     player = nullptr;
     map = nullptr;
     UnloadSound(s);
@@ -179,4 +181,14 @@ void Level1::addcolliders()
 bool Level1::complete()
 {
     return (finish and IsKeyPressed(KEY_SPACE));
+}
+
+void Level1::loadinstr()
+{
+    instpage.load("assets/pages/instr1.png");
+}
+
+void Level1::instr()
+{
+    DrawTexture(instpage.getTexture(), 0, 0, WHITE);
 }

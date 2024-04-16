@@ -10,13 +10,15 @@ class Game
     Level2 *lvl2;
     int currLevel;
 
+    bool instruction = true;
+
 public:
     Game();
     ~Game();
 
     void init(int width, int height, const char *title);
 
-    void startscreen(const char *name);
+    void startscreen();
 
     void begin();
     void update(float dt);

@@ -48,6 +48,10 @@ void Level::update(float dt)
 
 void Level::addcolliders() {}
 
+void Level::loadinstr() {}
+
+void Level::instr() {}
+
 void Level::updatechar(float dt) {}
 
 bool Level::complete() {return false;}

@@ -3,10 +3,7 @@
 // Window Attributes
 const int WIDTH = 1920;
 const int HEIGHT = 1080;
-const char *title = "numb";
-const char *TITLE = "NUMB";
-
-const char *exitText = "Are you sure you want to exit program? [Y/N]";
+const char *TITLE = "numb";
 
 int main(int argc, const char *argv[])
 {
@@ -14,9 +11,12 @@ int main(int argc, const char *argv[])
 
     Game game;
 
-    game.init(WIDTH, HEIGHT, title);
+    game.init(WIDTH, HEIGHT, TITLE);
     InitAudioDevice();
-    game.startscreen(TITLE);
+    game.startscreen();
+
+    Textures exitsc;
+    exitsc.load("assets/pages/exit.png");
 
     SetExitKey(KEY_NULL);
     bool exitWindowRequest{false}, exitWindow{false};
@@ -38,8 +38,7 @@ int main(int argc, const char *argv[])
 
         if (exitWindowRequest)
         {
-            ClearBackground(DARKGRAY);
-            DrawText(exitText, 240, 500, 60, LIGHTGRAY);
+            DrawTexture(exitsc.getTexture(), 0, 0, WHITE);
         }
         else
         {
@@ -48,6 +47,7 @@ int main(int argc, const char *argv[])
         }
         game.end();
     }
+    exitsc.unload();
     game.close();
     CloseAudioDevice();
 
