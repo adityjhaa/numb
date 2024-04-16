@@ -4,6 +4,7 @@
 #include <raymath.h>
 #include <vector>
 #include <iostream>
+#include "character.hpp"
 #include "texture.hpp"
 
 struct Block
@@ -20,7 +21,7 @@ class Floor
 public:
     Floor();
     Floor(char* path);
-    void draw();
-    void CheckCollision();
+    void Draw(Character* player, float camx, float camy);
+    bool CheckCollision(Character* player);
     ~Floor();
 };

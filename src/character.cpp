@@ -12,6 +12,18 @@ Character::Character(const char *path1, const char *path2)
     height = static_cast<float>(texture.getTexture().height);
 }
 
+Character::Character(const char *path1, const char *path2, const char *path3, const char *path4)
+{
+    idle.load(path1);
+    run.load(path2);
+    jump.load(path3);
+    fall.load(path4);
+    texture = idle;
+
+    width = static_cast<float>(texture.getTexture().width / 11.f);
+    height = static_cast<float>(texture.getTexture().height);
+}
+
 Character::~Character()
 {
     idle.unload();
@@ -25,4 +37,3 @@ void Character::initchar(Vector2 pos, int frame, float updateTime, float running
     this->updateTime = updateTime;
     this->runningTime = runningTime;
 }
-

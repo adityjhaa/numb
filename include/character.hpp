@@ -7,7 +7,7 @@
 class Character
 {
 protected:
-    Textures idle, run;
+    Textures idle, run, fall, jump;
     Textures texture;
     Rectangle rec;
     Vector2 pos, vel, lastframe;
@@ -22,6 +22,7 @@ protected:
 public:
     Character();
     Character(const char *path1, const char *path2);
+    Character(const char *path1, const char *path2, const char *path3, const char *path4);
     ~Character();
 
     void initchar(Vector2 pos, int frame, float updateTime, float runningTime);
@@ -29,4 +30,5 @@ public:
     friend class Level;
     friend class Level1;
     friend class Level2;
+    friend class Floor;
 };
