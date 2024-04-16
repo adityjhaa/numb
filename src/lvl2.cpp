@@ -4,6 +4,7 @@ Level2::Level2()
 {
     loadplayer();
     loadmap();
+    floor = Floor((char*)"ssets/maps/floor/Goodfloor.png");
 }
 
 Level2::~Level2()
@@ -69,10 +70,12 @@ void Level2::updatechar(float dt)
     if (player->pos.y > 3236.f)
         player->ypos = player->pos.y - 2760;
 
+    floor.draw();
     Rectangle source{player->frame * player->width, 0.f, player->right_left * player->width, player->height};
     Rectangle dest{player->xpos, player->ypos, player->scale * player->width, player->scale * player->height};
     DrawTexturePro(player->texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }
+
 
 void Level2::addcolliders() {}
 
