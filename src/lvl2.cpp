@@ -12,7 +12,10 @@ Level2::Level2()
     loadmap();
     floor = Floor((char *)"assets/maps/floor/Goodfloor.png");
     drops = Droppable();
+    multiplier = 1;
     tick = 0;
+    score = 0;
+    dropsFrequency = 120;
 }
 
 Level2::~Level2()
@@ -124,24 +127,42 @@ void Level2::updatechar(float dt)
     Rectangle source{player->frame * player->width, 0.f, player->right_left * player->width, player->height};
     Rectangle dest{player->xpos, player->ypos, player->scale * player->width, player->scale * player->height};
 
-    if (tick % DROPS_FREQUENCY == 0)
+    // Difficulty
+    if (player->pos.y > 1000)
     {
-        drops.Spaw(player);
+        multiplier = 5;
+    }
+    if (player->pos.y > 2000)
+    {
+        multiplier = 10;
+    }
+
+    if (tick % (dropsFrequency) == 0)
+    {
+        drops.Spaw(player, MAX_DROPS * multiplier);
+    }
+    if (tick % 60 == 0)
+    {
+        score += 1;
     }
 
     floor.Draw(player, camx, camy);
-
     drops.Draw(GetRandomValue(0, 3), camx, camy);
+    drops.CheckCollisions(&floor);
     drops.Update();
+    DrawText(("SCORE: " + std::to_string(score)).c_str(), 1336, 128, 96, WHITE);
     DrawTexturePro(player->texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }
 
-void Level2::addcolliders() {}
-
 bool Level2::complete()
 {
-    if (player->pos.y > 3840.f)
+    if (player->pos.y > 2560.f)
+    {
+        if (score > 100)
+            DrawText((char *)"YOU WIN!!", 712, 512, 96, RED);
+        else
+            DrawText((char *)"YOU LOSE", 712, 512, 96, RED);
         return true;
-
+    }
     return false;
 }

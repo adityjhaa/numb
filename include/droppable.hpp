@@ -2,21 +2,28 @@
 
 #include "texture.hpp"
 #include "character.hpp"
+#include "floor.hpp"
 #include <vector>
 #include <iostream>
-#define TEXTURE_SIZE 32
-#define MAX_DROPS 4
+
+struct Drop
+{
+    int posX;
+    int posY;
+    Rectangle rect;
+};
 
 class Droppable
 {
     Textures texture;
     float incrY;
-    std::vector<std::pair<int, int>> dropsList;
+    std::vector<Drop> dropsList;
 
 public:
     Droppable();
-    void Spaw(Character* player);
+    void Spaw(Character *player, int multipler);
     void Update();
     void Draw(int textureNum, float camx, float camy);
+    void CheckCollisions(Floor *floorObj);
     ~Droppable();
 };

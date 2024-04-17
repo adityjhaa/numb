@@ -12,7 +12,7 @@ Character::Character(const char *path1, const char *path2)
     height = static_cast<float>(texture.getTexture().height);
 }
 
-Character::Character(const char *path1, const char *path2, const char *path3, const char *path4, const char* path5)
+Character::Character(const char *path1, const char *path2, const char *path3, const char *path4, const char *path5)
 {
     idle.load(path1);
     run.load(path2);

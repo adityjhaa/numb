@@ -22,7 +22,7 @@ protected:
 public:
     Character();
     Character(const char *path1, const char *path2);
-    Character(const char *path1, const char *path2, const char *path3, const char *path4, const char* path5);
+    Character(const char *path1, const char *path2, const char *path3, const char *path4, const char *path5);
     ~Character();
 
     void initchar(Vector2 pos, int frame, float updateTime, float runningTime);

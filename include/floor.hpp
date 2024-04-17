@@ -20,8 +20,10 @@ class Floor
 
 public:
     Floor();
-    Floor(char* path);
-    void Draw(Character* player, float camx, float camy);
-    bool CheckCollision(Character* player, float playerx, float playery);
+    Floor(char *path);
+    void Draw(Character *player, float camx, float camy);
+    bool CheckCollision(Character *player, float playerx, float playery);
+    std::vector<std::vector<Block>> getFloor();
+    void removeBlock(int i, int j);
     ~Floor();
 };
