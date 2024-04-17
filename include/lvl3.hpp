@@ -37,7 +37,7 @@ struct WaterFall
 struct LavaFall
 {
     Vector2 pos;
-    Texture2D tex = LoadTexture("assets/props/FallingWater.png");
+    Texture2D tex = LoadTexture("assets/props/FallingLava.png");
 };
 
 struct Torch
@@ -69,7 +69,7 @@ class Level3 : public Level
     Map *map1, *map2;
     Sound s;
 
-    int frame_cnt{}, flow_frame{}, fall_frame{};
+    int frame_cnt{}, fall_frame{};
     bool firstm{true}, stairs{}, opendoor{}, dooropen{}, enter{};
 
     std::vector<Torch> ftorches;

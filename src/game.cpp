@@ -35,7 +35,6 @@ void Game::startscreen()
         }
         EndDrawing();
     }
-    currLevel = 3;
     startsc.unload();
     menu = new Menu();
     home = new Home();
