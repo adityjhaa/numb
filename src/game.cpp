@@ -11,6 +11,7 @@ Game::~Game()
     home = nullptr;
     lvl1 = nullptr;
     lvl2 = nullptr;
+    lvl3 = nullptr;
 }
 
 void Game::init(int width, int height, const char *title)
@@ -39,6 +40,7 @@ void Game::startscreen()
     home = new Home();
     lvl1 = new Level1();
     lvl2 = new Level2();
+    lvl3 = new Level3();
 }
 
 void Game::begin()
@@ -129,8 +131,8 @@ void Game::update(float dt)
 
         //     return;
         // }
-        // lvl3->render();
-        // lvl3->update(dt);
+        lvl3->render();
+        lvl3->update(dt);
         // if (lvl3->complete())
         // {
         //     if (home->currmap == 2)

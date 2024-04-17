@@ -7,7 +7,7 @@
 class Character
 {
 protected:
-    Textures idle, run;
+    Textures idle, run, jump, fall, double_jump, hit;
     Textures texture;
     Rectangle rec;
     Vector2 pos, vel, lastframe;
@@ -21,7 +21,7 @@ protected:
 
 public:
     Character();
-    Character(const char *path1, const char *path2);
+    Character(const char *path1, const char *path2, const char *path3="", const char *path4="", const char *path5="", const char *path6="");
     ~Character();
 
     void initchar(Vector2 pos, int frame, float updateTime, float runningTime);
