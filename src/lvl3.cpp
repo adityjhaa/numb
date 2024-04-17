@@ -114,7 +114,7 @@ void Level3::render()
         map1->drawmap(Vector2{camx, camy});
         DrawTexturePro(rdoor.tex, Rectangle{(rdoor.frame % 5) * 24.f, (rdoor.frame / 5) * 24.f, 24.f, 24.f}, Rectangle{rdoor.pos.x, rdoor.pos.y, 192.f, 192.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto t : ftorches)
-            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, t.frame * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
+            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, frame3 * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &c : fcandles)
             DrawTexturePro(c.tex, Rectangle{c.id * 12.f, c.frame * 12.f, 12.f, 12.f}, Rectangle{c.pos.x, c.pos.y, 48.f, 48.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &s : fchan)
@@ -129,7 +129,7 @@ void Level3::render()
         map2->drawmap(Vector2{camx, camy});
         DrawTexturePro(ddoor.tex, Rectangle{(ddoor.frame % 5) * 24.f, (ddoor.frame / 5) * 24.f, 24.f, 24.f}, Rectangle{ddoor.pos.x, ddoor.pos.y, 192.f, 192.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &t : storches)
-            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, t.frame * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
+            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, frame3 * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &c : scandles)
             DrawTexturePro(c.tex, Rectangle{c.id * 12.f, c.frame * 12.f, 12.f, 12.f}, Rectangle{c.pos.x, c.pos.y, 48.f, 48.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &s : schan)
@@ -138,6 +138,7 @@ void Level3::render()
             DrawTexturePro(l.tex, Rectangle{(fall_frame % 5) * 24.f, (fall_frame / 5) * 48.f}, Rectangle{l.pos.x, l.pos.y, 48.f, 48.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &l : water)
             DrawTexturePro(l.tex, Rectangle{(fall_frame % 5) * 24.f, 6.f + (fall_frame / 5) * 72.f, 24.f, 36.f}, Rectangle{l.pos.x, l.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
+        DrawTexturePro(fountain.tex, Rectangle{(frame3 % 2) * 24.f, (frame3 / 2) * 24.f, 24.f, 24.f}, Rectangle{fountain.pos.x, fountain.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
     }
 }
 
@@ -163,16 +164,8 @@ void Level3::update(float dt)
 
     if (frame_cnt % 10 == 0)
     {
-        for (auto &t : ftorches)
-        {
-            t.frame++;
-            t.frame %= 3;
-        }
-        for (auto &t : storches)
-        {
-            t.frame++;
-            t.frame %= 3;
-        }
+        frame3++;
+        frame3 %= 3;
     }
 
     if (frame_cnt % 5 == 0)
