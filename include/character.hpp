@@ -31,4 +31,5 @@ public:
     friend class Level1;
     friend class Level2;
     friend class Floor;
+    friend class Droppable;
 };

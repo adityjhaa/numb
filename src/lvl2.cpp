@@ -11,6 +11,8 @@ Level2::Level2()
     loadplayer();
     loadmap();
     floor = Floor((char *)"assets/maps/floor/Goodfloor.png");
+    drops = Droppable();
+    tick = 0;
 }
 
 Level2::~Level2()
@@ -26,7 +28,7 @@ void Level2::loadmap()
 
 void Level2::updatechar(float dt)
 {
-
+    tick += 1;
     player->lastframe = player->pos;
     if (IsKeyDown(KEY_A))
         player->vel.x = -1.0;
@@ -121,10 +123,25 @@ void Level2::updatechar(float dt)
 
     Rectangle source{player->frame * player->width, 0.f, player->right_left * player->width, player->height};
     Rectangle dest{player->xpos, player->ypos, player->scale * player->width, player->scale * player->height};
+
+    if (tick % DROPS_FREQUENCY == 0)
+    {
+        drops.Spaw(player);
+    }
+
     floor.Draw(player, camx, camy);
+
+    drops.Draw(GetRandomValue(0, 3), camx, camy);
+    drops.Update();
     DrawTexturePro(player->texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }
 
 void Level2::addcolliders() {}
 
-bool Level2::complete() { return false; }
+bool Level2::complete()
+{
+    if (player->pos.y > 3840.f)
+        return true;
+
+    return false;
+}
