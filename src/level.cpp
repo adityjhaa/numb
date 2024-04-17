@@ -54,4 +54,4 @@ void Level::instr() {}
 
 void Level::updatechar(float dt) {}
 
-bool Level::complete() {return false;}
+bool Level::complete() { return false; }

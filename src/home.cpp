@@ -1,5 +1,5 @@
 #include "../include/home.hpp"
-#include <iostream>
+
 Home::Home()
 {
     loadplayer();

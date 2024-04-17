@@ -22,7 +22,7 @@ protected:
 
     std::vector<Rectangle> colliders;
     virtual void addcolliders();
-    
+
     virtual void updatechar(float dt);
     virtual void loadinstr();
 
