@@ -22,6 +22,6 @@ public:
     Floor();
     Floor(char* path);
     void Draw(Character* player, float camx, float camy);
-    bool CheckCollision(Character* player);
+    bool CheckCollision(Character* player, float playerx, float playery);
     ~Floor();
 };

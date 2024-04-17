@@ -14,7 +14,7 @@ protected:
     std::pair<int, int> cameramovement;
     float camx{}, camy{};
 
-    void loadplayer();
+    virtual void loadplayer();
     virtual void loadmap();
 
     bool finish;

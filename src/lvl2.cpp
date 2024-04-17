@@ -2,7 +2,7 @@
 
 void Level2::loadplayer()
 {
-    player = new Character("assets/main_char/Idle.png", "assets/main_char/Run.png", "assets/main_char/Jump.png", "assets/main_char/Fall.png");
+    player = new Character("assets/main_char/Idle.png", "assets/main_char/Run.png", "assets/main_char/Jump.png", "assets/main_char/Fall.png", "assets/main_char/Double_jump.png");
     player->initchar(Vector2{256.f, 256.f}, 0, 1.0 / 15.0, 0.f);
 }
 
@@ -26,7 +26,18 @@ void Level2::loadmap()
 
 void Level2::updatechar(float dt)
 {
-    if (!floor.CheckCollision(player))
+
+    player->lastframe = player->pos;
+    if (IsKeyDown(KEY_A))
+        player->vel.x = -1.0;
+    if (IsKeyDown(KEY_D))
+        player->vel.x = 1.0;
+    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_D))
+    {
+        player->vel = {};
+    }
+
+    if (!floor.CheckCollision(player, player->xpos, player->ypos))
     {
         player->vel.y += .05;
     }
@@ -36,20 +47,11 @@ void Level2::updatechar(float dt)
         isIdle = true;
         jumpCount = 0;
     }
-    player->lastframe = player->pos;
-    if (IsKeyDown(KEY_A))
-        player->vel.x = -1.0;
-    if (IsKeyDown(KEY_D))
-        player->vel.x = 1.0;
+
     if (IsKeyPressed(KEY_SPACE) && jumpCount < MAX_JUMP_COUNT)
     {
         player->vel.y = -1.f;
         jumpCount += 1;
-    }
-
-    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_D))
-    {
-        player->vel = {};
     }
 
     if (Vector2Length(player->vel) != 0.0)
@@ -100,7 +102,10 @@ void Level2::updatechar(float dt)
     }
     if (player->vel.y < 0)
     {
-        player->texture = player->jump;
+        if (jumpCount == 1)
+            player->texture = player->jump;
+        else if (jumpCount == 2)
+            player->texture = player->doubleJump;
     }
     if (player->vel.y == 0)
     {
@@ -114,9 +119,9 @@ void Level2::updatechar(float dt)
         }
     }
 
-    floor.Draw(player, camx, camy);
     Rectangle source{player->frame * player->width, 0.f, player->right_left * player->width, player->height};
     Rectangle dest{player->xpos, player->ypos, player->scale * player->width, player->scale * player->height};
+    floor.Draw(player, camx, camy);
     DrawTexturePro(player->texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }
 
