@@ -2,7 +2,6 @@
 
 #include <raylib.h>
 #include <raymath.h>
-#include "collision.hpp"
 #include "texture.hpp"
 
 class Character
