@@ -22,10 +22,13 @@ class Level2 : public Level
 
     virtual void loadmap() override;
     virtual void updatechar(float dt) override;
+    virtual void loadinstr() override;
 
 public:
     Level2();
     ~Level2();
+    unsigned long long int getScore();
     void loadplayer() override;
+    virtual void instr() override;
     virtual bool complete() override;
 };

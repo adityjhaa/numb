@@ -8,6 +8,7 @@ void Level2::loadplayer()
 
 Level2::Level2()
 {
+    loadinstr();
     loadplayer();
     loadmap();
     floor = Floor((char *)"assets/maps/floor/Goodfloor.png");
@@ -154,15 +155,22 @@ void Level2::updatechar(float dt)
     DrawTexturePro(player->texture.getTexture(), source, dest, Vector2{}, 0.0, WHITE);
 }
 
+unsigned long long int Level2::getScore()
+{
+    return score;
+}
+
 bool Level2::complete()
 {
-    if (player->pos.y > 2560.f)
-    {
-        if (score > 100)
-            DrawText((char *)"YOU WIN!!", 712, 512, 96, RED);
-        else
-            DrawText((char *)"YOU LOSE", 712, 512, 96, RED);
-        return true;
-    }
-    return false;
+    return (player->pos.y > 2560.f);
+}
+
+void Level2::loadinstr()
+{
+    instpage.load("assets/pages/instr2.png");
+}
+
+void Level2::instr()
+{
+    DrawTexture(instpage.getTexture(), 0, 0, WHITE);
 }

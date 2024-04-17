@@ -35,7 +35,7 @@ void Game::startscreen()
         }
         EndDrawing();
     }
-    currLevel = 3;
+    currLevel = 0;
     startsc.unload();
     menu = new Menu();
     home = new Home();
@@ -107,7 +107,7 @@ void Game::update(float dt)
     case 2:
         if (instruction[1])
         {
-            lvl1->instr();
+            lvl2->instr();
             if (IsKeyPressed(KEY_SPACE))
                 instruction[1] = false;
 
@@ -115,10 +115,15 @@ void Game::update(float dt)
         }
         lvl2->render();
         lvl2->update(dt);
-        if (lvl2->complete())
+        if (lvl2->complete() && lvl2->getScore() >= 100)
         {
             if (home->currmap == 1)
                 home->currmap = 2;
+            currLevel = 0;
+        }
+        else if (lvl2->complete() && lvl2->getScore() < 100)
+        {
+            home->currmap = 1;
             currLevel = 0;
         }
 
@@ -141,7 +146,7 @@ void Game::update(float dt)
         //     currLevel = 0;
         // }
 
-        break;
+        // break;
     case 4:
         // if (instruction[3])
         // {
