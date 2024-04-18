@@ -38,9 +38,6 @@ void Game::startscreen()
     startsc.unload();
     menu = new Menu();
     home = new Home();
-    lvl1 = new Level1();
-    lvl2 = new Level2();
-    lvl3 = new Level3();
 }
 
 void Game::begin()
@@ -81,8 +78,27 @@ void Game::update(float dt)
             currLevel = -1;
 
         if (IsKeyPressed(KEY_ENTER))
+        {
             currLevel = home->pressed;
-
+            switch(currLevel)
+            {
+            case 1:
+                lvl1 = new Level1();
+                break;
+            case 2:
+                lvl2 = new Level2();
+                break;
+            case 3:
+                lvl3 = new Level3();
+                break;
+            case 4:
+                // lvl4 = new Level1();
+                break;
+            default:
+                break;    
+            }    
+        }
+        
         break;
     case 1:
         if (instruction[0])
@@ -100,13 +116,14 @@ void Game::update(float dt)
             if (home->currmap == 0)
                 home->currmap = 1;
             currLevel = 0;
+            delete lvl1;
         }
 
         break;
     case 2:
         if (instruction[1])
         {
-            lvl1->instr();
+            lvl2->instr();
             if (IsKeyPressed(KEY_SPACE))
                 instruction[1] = false;
 
@@ -114,11 +131,18 @@ void Game::update(float dt)
         }
         lvl2->render();
         lvl2->update(dt);
-        if (lvl2->complete())
+        if (lvl2->complete() && lvl2->getScore() >= 100)
         {
             if (home->currmap == 1)
                 home->currmap = 2;
             currLevel = 0;
+            delete lvl2;
+        }
+        else if (lvl2->complete() && lvl2->getScore() < 100)
+        {
+            home->currmap = 1;
+            currLevel = 0;
+            delete lvl2;
         }
 
         break;
@@ -140,7 +164,7 @@ void Game::update(float dt)
         //     currLevel = 0;
         // }
 
-        break;
+        // break;
     case 4:
         // if (instruction[3])
         // {

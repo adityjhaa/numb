@@ -7,7 +7,10 @@
 class Character
 {
 protected:
+
     Textures idle, run, jump, fall, double_jump, hit;
+    Textures idle, run, fall, jump, doubleJump;
+
     Textures texture;
     Rectangle rec;
     Vector2 pos, vel, lastframe;
@@ -32,4 +35,6 @@ public:
     friend class Level2;
     friend class Level3;
     friend class Level4;
+    friend class Floor;
+    friend class Droppable;
 };

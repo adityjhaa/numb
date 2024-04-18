@@ -8,7 +8,7 @@ Character::~Character()
     run.unload();
     jump.unload();
     fall.unload();
-    double_jump.unload();
+    doubleJump.unload();
     hit.unload();
 }
 
@@ -18,7 +18,7 @@ Character::Character(const char *path1, const char *path2, const char *path3, co
     run.load(path2);
     jump.load(path3);
     fall.load(path4);
-    double_jump.load(path5);
+    doubleJump.load(path5);
     hit.load(path6);
     texture = idle;
 
@@ -33,4 +33,3 @@ void Character::initchar(Vector2 pos, int frame, float updateTime, float running
     this->updateTime = updateTime;
     this->runningTime = runningTime;
 }
-
