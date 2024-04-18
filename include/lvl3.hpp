@@ -37,7 +37,7 @@ struct WaterFall
 struct LavaFall
 {
     Vector2 pos;
-    Texture2D tex = LoadTexture("assets/props/FallingWater.png");
+    Texture2D tex = LoadTexture("assets/props/FallingLava.png");
 };
 
 struct Torch
@@ -64,12 +64,19 @@ struct Chandelier
     Texture2D tex = LoadTexture("assets/props/Chandeliers.png");
 };
 
+struct Fountain
+{
+    int frame{};
+    Vector2 pos{5.f, 576.f};
+    Texture tex = LoadTexture("assets/props/Fountain.png");
+};
+
 class Level3 : public Level
 {
     Map *map1, *map2;
     Sound s;
 
-    int frame_cnt{}, flow_frame{}, fall_frame{};
+    int frame_cnt{}, fall_frame{}, frame3{};
     bool firstm{true}, stairs{}, opendoor{}, dooropen{}, enter{};
 
     std::vector<Torch> ftorches;
@@ -88,6 +95,7 @@ class Level3 : public Level
 
     RDoor rdoor;
     DDoor ddoor;
+    Fountain fountain;
 
 protected:
     virtual void loadmap() override;

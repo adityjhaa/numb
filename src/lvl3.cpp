@@ -114,22 +114,31 @@ void Level3::render()
         map1->drawmap(Vector2{camx, camy});
         DrawTexturePro(rdoor.tex, Rectangle{(rdoor.frame % 5) * 24.f, (rdoor.frame / 5) * 24.f, 24.f, 24.f}, Rectangle{rdoor.pos.x, rdoor.pos.y, 192.f, 192.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto t : ftorches)
-            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, t.frame * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
+            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, frame3 * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &c : fcandles)
             DrawTexturePro(c.tex, Rectangle{c.id * 12.f, c.frame * 12.f, 12.f, 12.f}, Rectangle{c.pos.x, c.pos.y, 48.f, 48.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &s : fchan)
             DrawTexturePro(s.tex, Rectangle{s.id * 36.f, s.frame * 36.f, 36.f, 36.f}, Rectangle{s.pos.x, s.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
+        for (auto &l : lavaf)
+            DrawTexturePro(l.tex, Rectangle{(fall_frame % 5) * 24.f, (fall_frame / 5) * 48.f}, Rectangle{l.pos.x, l.pos.y, 48.f, 48.f}, Vector2{camx, camy}, 0.f, WHITE);
+        for (auto &l : lava)
+            DrawTexturePro(l.tex, Rectangle{(fall_frame % 5) * 24.f, 6.f + (fall_frame / 5) * 72.f, 24.f, 36.f}, Rectangle{l.pos.x, l.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
     }
     else
     {
         map2->drawmap(Vector2{camx, camy});
         DrawTexturePro(ddoor.tex, Rectangle{(ddoor.frame % 5) * 24.f, (ddoor.frame / 5) * 24.f, 24.f, 24.f}, Rectangle{ddoor.pos.x, ddoor.pos.y, 192.f, 192.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &t : storches)
-            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, t.frame * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
+            DrawTexturePro(t.tex, Rectangle{t.id * 24.f, frame3 * 24.f, 24.f, 24.f}, Rectangle{t.pos.x, t.pos.y, 96.f, 96.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &c : scandles)
             DrawTexturePro(c.tex, Rectangle{c.id * 12.f, c.frame * 12.f, 12.f, 12.f}, Rectangle{c.pos.x, c.pos.y, 48.f, 48.f}, Vector2{camx, camy}, 0.f, WHITE);
         for (auto &s : schan)
             DrawTexturePro(s.tex, Rectangle{s.id * 36.f, s.frame * 36.f, 36.f, 36.f}, Rectangle{s.pos.x, s.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
+        for (auto &l : waterf)
+            DrawTexturePro(l.tex, Rectangle{(fall_frame % 5) * 24.f, (fall_frame / 5) * 48.f}, Rectangle{l.pos.x, l.pos.y, 48.f, 48.f}, Vector2{camx, camy}, 0.f, WHITE);
+        for (auto &l : water)
+            DrawTexturePro(l.tex, Rectangle{(fall_frame % 5) * 24.f, 6.f + (fall_frame / 5) * 72.f, 24.f, 36.f}, Rectangle{l.pos.x, l.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
+        DrawTexturePro(fountain.tex, Rectangle{(frame3 % 2) * 24.f, (frame3 / 2) * 24.f, 24.f, 24.f}, Rectangle{fountain.pos.x, fountain.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
     }
 }
 
@@ -155,16 +164,8 @@ void Level3::update(float dt)
 
     if (frame_cnt % 10 == 0)
     {
-        for (auto &t : ftorches)
-        {
-            t.frame++;
-            t.frame %= 3;
-        }
-        for (auto &t : storches)
-        {
-            t.frame++;
-            t.frame %= 3;
-        }
+        frame3++;
+        frame3 %= 3;
     }
 
     if (frame_cnt % 5 == 0)
@@ -189,6 +190,12 @@ void Level3::update(float dt)
             s.frame++;
             s.frame %= 6;
         }
+    }
+
+    if (frame_cnt % 3 == 0)
+    {
+        fall_frame++;
+        fall_frame %= 24;
     }
 
     updatechar(dt);
@@ -243,7 +250,20 @@ void Level3::loadprops()
     schan.push_back(Chandelier{2, 0, Vector2{2568.f, 0.f}});
     schan.push_back(Chandelier{3, 0, Vector2{3528.f, 0.f}});
 
-    
+    for (int i = 0; i < 2; ++i)
+    {
+        for (int j = 0; j < 21; ++j)
+        {
+            lavaf.push_back(LavaFall{Vector2{2880.f + i * 48.f, j * 48.f}});
+            waterf.push_back(WaterFall{Vector2{2880.f + i * 48.f, j * 48.f}});
+        }
+    }
+
+    for (int i = 0; i < 40; ++i)
+    {
+        lava.push_back(Lava{Vector2{i * 96.f, 960.f}});
+        water.push_back(Water{Vector2{i * 96.f, 960.f}});
+    }
 }
 
 void Level3::unloadprops()
