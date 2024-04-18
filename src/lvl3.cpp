@@ -195,7 +195,7 @@ void Level3::update(float dt)
     if (frame_cnt % 3 == 0)
     {
         fall_frame++;
-        fall_frame %= 24;
+        fall_frame %= 9;
     }
 
     updatechar(dt);
@@ -282,4 +282,17 @@ void Level3::unloadprops()
         UnloadTexture(s.tex);
     for (auto &s : schan)
         UnloadTexture(s.tex);
+
+    for (auto &l : water)
+        UnloadTexture(l.tex);
+    for (auto &l : waterf)
+        UnloadTexture(l.tex);
+    for (auto &l : lava)
+        UnloadTexture(l.tex);
+    for (auto &l : lavaf)
+        UnloadTexture(l.tex);
+
+    UnloadTexture(rdoor.tex);
+    UnloadTexture(ddoor.tex);
+    UnloadTexture(fountain.tex);
 }

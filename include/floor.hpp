@@ -1,11 +1,7 @@
 #pragma once
 
-#include <raylib.h>
-#include <raymath.h>
-#include <vector>
-#include <iostream>
 #include "character.hpp"
-#include "texture.hpp"
+#include <vector>
 
 struct Block
 {

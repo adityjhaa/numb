@@ -4,7 +4,7 @@
 
 Floor::Floor()
 {
-    floor = {};
+    // floor = {};
 }
 
 Floor::~Floor()

@@ -140,7 +140,6 @@ void Game::update(float dt)
         }
         else if (lvl2->complete() && lvl2->getScore() < 100)
         {
-            home->currmap = 1;
             currLevel = 0;
             delete lvl2;
         }
@@ -164,7 +163,7 @@ void Game::update(float dt)
         //     currLevel = 0;
         // }
 
-        // break;
+        break;
     case 4:
         // if (instruction[3])
         // {

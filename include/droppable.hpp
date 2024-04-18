@@ -1,10 +1,7 @@
 #pragma once
 
-#include "texture.hpp"
-#include "character.hpp"
 #include "floor.hpp"
 #include <vector>
-#include <iostream>
 
 struct Drop
 {

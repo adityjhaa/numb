@@ -8,8 +8,7 @@ class Character
 {
 protected:
 
-    Textures idle, run, jump, fall, double_jump, hit;
-    Textures idle, run, fall, jump, doubleJump;
+    Textures idle, run, fall, jump, doubleJump, hit;
 
     Textures texture;
     Rectangle rec;
