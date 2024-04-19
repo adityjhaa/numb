@@ -36,6 +36,7 @@ void Game::startscreen()
         EndDrawing();
     }
     startsc.unload();
+    lvl3=new Level3();
     menu = new Menu();
     home = new Home();
 }
@@ -156,18 +157,18 @@ void Game::update(float dt)
         // }
         lvl3->render();
         lvl3->update(dt);
-        // if (lvl3->complete())
-        // {
-        //     if (home->currmap == 2)
-        //         home->currmap = 3;
-        //     currLevel = 0;
-        //     delete lvl3;
-        // }
-        // if (lvl3->incomplete())
-        // {
-        //     currLevel = 0;
-        //     delete lvl3;
-        // }
+        if (lvl3->complete())
+        {
+            if (home->currmap == 2)
+                home->currmap = 3;
+            currLevel = 0;
+            delete lvl3;
+        }
+        if (lvl3->incomplete())
+        {
+            currLevel = 0;
+            delete lvl3;
+        }
 
         break;
     case 4:

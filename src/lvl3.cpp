@@ -6,6 +6,7 @@ Level3::Level3()
     loadinstr();
     loadmap();
     loadplayer();
+    loadenemies();
     loadprops();
     addcolliders();
     s = LoadSound("");
@@ -18,6 +19,10 @@ Level3::~Level3()
     player = nullptr;
     map = map1 = map2 = nullptr;
     UnloadSound(s);
+    for (auto e : enemies)
+    {
+        e.first = nullptr;
+    }
 }
 
 void Level3::loadplayer()
@@ -41,12 +46,12 @@ void Level3::loadmap()
 
 void Level3::addcolliders()
 {
-    colliders.push_back(Rectangle{3600.f, 240.f, 96.f, 144.f});
+    colliders.push_back(Rectangle{1680.f, 240.f, 96.f, 144.f});
 }
 
 void Level3::updatechar(float dt)
 {
-    if ((player->pos.x > 3316.f) and (player->pos.x < 3416.f))
+    if ((player->pos.x > 3352.f) and (player->pos.x < 3386.f))
     {
         if (player->pos.y >= 592.f)
             stairs = 1; // can go up
@@ -63,13 +68,10 @@ void Level3::updatechar(float dt)
 
     player->lastframe = player->pos;
     if (IsKeyDown(KEY_A))
-        player->vel.x = -1.0;
-
-    // if (IsKeyDown(KEY_S) and (stairs > 2))
-    //     player->vel.y = 1.0;
+        player->vel.x -= 1.0;
 
     if (IsKeyDown(KEY_D))
-        player->vel.x = 1.0;
+        player->vel.x += 1.0;
 
     if (IsKeyDown(KEY_W) and (stairs % 2))
         player->vel.y = -1.0;
@@ -105,15 +107,19 @@ void Level3::updatechar(float dt)
         player->maxframes = 11;
     }
 
+    jump = false;
+
     if (player->vel.y < 0.f)
     {
         if (jumpCount == 1)
         {
+            jump = true;
             player->texture = player->jump;
             player->maxframes = 1;
         }
         else if (jumpCount == 2)
         {
+            jump = true;
             player->texture = player->doubleJump;
             player->maxframes = 6;
         }
@@ -121,6 +127,7 @@ void Level3::updatechar(float dt)
 
     if ((player->vel.y > 0.f) || f)
     {
+        jump = true;
         player->texture = player->fall;
         player->maxframes = 1;
     }
@@ -167,6 +174,24 @@ void Level3::updatechar(float dt)
         player->pos.y = 1200.f;
 
     stairs = 0;
+
+    if (!ehit)
+        playerhit();
+
+    if (phit)
+    {
+        player->texture = player->hit;
+        player->maxframes = 7;
+        hitcnt++;
+    }
+    else
+        phit = false;
+
+    if (hitcnt == 105)
+    {
+        phit = false;
+        hitcnt = 0;
+    }
 
     Rectangle source{player->frame * player->width, 0.f, player->right_left * player->width, player->height};
     Rectangle dest{player->xpos, player->ypos, player->scale * player->width, player->scale * player->height};
@@ -220,23 +245,26 @@ void Level3::update(float dt)
     frame_cnt++;
     frame_cnt %= 30;
 
-    player->rec = Rectangle{player->pos.x, player->pos.y, 128.f, 128.f};
-    if (IsKeyPressed(KEY_ENTER) and CheckCollisionRecs(player->rec, colliders[0]) and firstm)
-        opendoor = true;
-    if (opendoor and (frame_cnt % 4 == 0))
-        rdoor.frame++;
-    if (rdoor.frame == 21)
-        firstm = false;
-    if (rdoor.frame > 20)
-        rdoor.frame = 20;
-    if ((!firstm and !dooropen) and (frame_cnt % 4 == 0))
-        ddoor.frame++;
-    if (ddoor.frame == 20)
-        enter = true;
-    if (ddoor.frame > 20)
-        ddoor.frame = 20;
+    player->rec = Rectangle{player->pos.x + 20.f - camx, player->pos.y + 20.f, 88.f, 108.f};
 
-    if (frame_cnt % 10 == 0)
+    {
+        if (IsKeyPressed(KEY_ENTER) and CheckCollisionRecs(player->rec, colliders[0]) and firstm)
+            opendoor = true;
+        if (opendoor and (frame_cnt % 4 == 0))
+            rdoor.frame++;
+        if (rdoor.frame == 21)
+            firstm = false;
+        if (rdoor.frame > 20)
+            rdoor.frame = 20;
+        if ((!firstm and !dooropen) and (frame_cnt % 4 == 0))
+            ddoor.frame++;
+        if (ddoor.frame == 20)
+            enter = true;
+        if (ddoor.frame > 20)
+            ddoor.frame = 20;
+    }
+
+    if (frame_cnt % 8 == 0)
     {
         frame3++;
         frame3 %= 3;
@@ -272,6 +300,7 @@ void Level3::update(float dt)
         fall_frame %= 9;
     }
 
+    updateenemies(dt);
     updatechar(dt);
 
     if (firstm)
@@ -288,7 +317,10 @@ void Level3::update(float dt)
 
 bool Level3::complete()
 {
-    return false;
+    if (!firstm and player->pos.x <= 100.f)
+        finish = true;
+
+    return finish and IsKeyPressed(KEY_ENTER);
 }
 
 void Level3::loadinstr()
@@ -392,4 +424,115 @@ bool Level3::fall()
         }
     }
     return false;
+}
+
+void Level3::loadenemies()
+{
+    for (int i = 0; i < 5; i++)
+        enemies.push_back({new Enemy("assets/enemy/Idle.png", "assets/enemy/Run.png", "assets/enemy/Hit.png"), (i % 2 != 0)});
+
+    enemies[0].first->initenemy(Vector2{632.f, 576.f}, 248, 1028);
+    enemies[1].first->initenemy(Vector2{1592.f, 576.f}, 1212, 1992);
+    enemies[2].first->initenemy(Vector2{1592.f, 576.f}, 1212, 1992);
+    enemies[3].first->initenemy(Vector2{2480, 576.f}, 2172, 2700);
+    enemies[4].first->initenemy(Vector2{2480, 576.f}, 2172, 2700);
+}
+
+void Level3::updateenemies(float dt)
+{
+    if (!phit)
+        enemyhit();
+
+    for (auto e : enemies)
+    {
+        if (e.second != firstm)
+            continue;
+
+        if (e.first->followplayer(player->pos))
+        {
+            e.first->vel = Vector2Scale(Vector2Normalize(Vector2{e.first->pos.x - player->pos.x, 0.f}), e.first->speed);
+            if (e.first->pos.x <= e.first->start or e.first->pos.x >= e.first->end)
+                e.first->vel = {};
+            e.first->pos = Vector2Subtract(e.first->pos, e.first->vel);
+        }
+        if (Vector2Length(e.first->vel) != 0.f)
+        {
+            if (e.first->vel.x > 0.f)
+                e.first->right_left = 1;
+            else if (e.first->vel.x < 0.f)
+                e.first->right_left = -1;
+
+            e.first->texture = e.first->run;
+            e.first->maxframes = 12;
+        }
+        else
+        {
+            e.first->texture = e.first->idle;
+            e.first->maxframes = 11;
+        }
+
+        e.first->runningTime += dt;
+        if (e.first->runningTime >= e.first->updateTime)
+        {
+            e.first->runningTime = 0.f;
+            e.first->frame++;
+            e.first->frame = e.first->frame % e.first->maxframes;
+        }
+        e.first->vel = {};
+
+        if (ehit)
+        {
+            e.first->texture = e.first->hit;
+            e.first->maxframes = 7;
+            hitcnt++;
+        }
+        else
+            ehit = false;
+
+        if (hitcnt == 105)
+        {
+            ehit = false;
+            hitcnt = 0;
+        }
+
+        e.first->rec = Rectangle{e.first->pos.x - camx + 39.f, e.first->pos.y + 75.f, 66.f, 69.f};
+
+        DrawTexturePro(e.first->texture.getTexture(), Rectangle{e.first->frame * e.first->width, 0.f, e.first->right_left * e.first->width, e.first->height}, Rectangle{e.first->pos.x, e.first->pos.y, e.first->width * e.first->scale, e.first->height * e.first->scale}, Vector2{camx, camy}, 0.f, WHITE);
+    }
+}
+
+bool Level3::incomplete()
+{
+    if (player->pos.y > 1180.f)
+    {
+        lose = true;
+    }
+
+    if (health == 0)
+    {
+        lose = true;
+    }
+
+    return lose and IsKeyPressed(KEY_ENTER);
+}
+
+void Level3::playerhit()
+{
+    for (auto e : enemies)
+    {
+        if (!jump and CheckCollisionRecs(player->rec, e.first->rec) and !phit)
+        {
+            phit = true;
+            health--;
+        }
+    }
+}
+
+void Level3::enemyhit()
+{
+    for (auto e : enemies)
+    {
+        if (jump and CheckCollisionRecs(player->rec, e.first->rec) and !ehit)
+            ehit = true;
+    }
 }
