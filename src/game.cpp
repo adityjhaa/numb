@@ -80,7 +80,7 @@ void Game::update(float dt)
         if (IsKeyPressed(KEY_ENTER))
         {
             currLevel = home->pressed;
-            switch(currLevel)
+            switch (currLevel)
             {
             case 1:
                 lvl1 = new Level1();
@@ -92,13 +92,13 @@ void Game::update(float dt)
                 lvl3 = new Level3();
                 break;
             case 4:
-                // lvl4 = new Level1();
+                // lvl4 = new Level4();
                 break;
             default:
-                break;    
-            }    
+                break;
+            }
         }
-        
+
         break;
     case 1:
         if (instruction[0])
@@ -161,21 +161,27 @@ void Game::update(float dt)
         //     if (home->currmap == 2)
         //         home->currmap = 3;
         //     currLevel = 0;
+        //     delete lvl3;
+        // }
+        // if (lvl3->incomplete())
+        // {
+        //     currLevel = 0;
+        //     delete lvl3;
         // }
 
         break;
     case 4:
         // if (instruction[3])
         // {
-        //     lvl3->instr();
+        //     lvl4->instr();
         //     if (IsKeyPressed(KEY_SPACE))
         //         instruction[3] = false;
 
         //     return;
         // }
-        // lvl3->render();
-        // lvl3->update(dt);
-        // if (lvl3->complete())
+        // lvl4->render();
+        // lvl4->update(dt);
+        // if (lvl4->complete())
         // {
         //     currLevel = 0;
         // }

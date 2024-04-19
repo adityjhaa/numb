@@ -76,8 +76,8 @@ class Level3 : public Level
     Map *map1, *map2;
     Sound s;
 
-    int frame_cnt{}, fall_frame{}, frame3{};
-    bool firstm{true}, stairs{}, opendoor{}, dooropen{}, enter{};
+    int frame_cnt{}, fall_frame{}, frame3{}, jumpCount{0}, stairs{};
+    bool firstm{true}, opendoor{}, dooropen{}, enter{};
 
     std::vector<Torch> ftorches;
     std::vector<Torch> storches;
@@ -97,6 +97,9 @@ class Level3 : public Level
     DDoor ddoor;
     Fountain fountain;
 
+    Rectangle antimatter{2832.f, 720.f, 192.f, 288.f};
+
+    bool fall();
 protected:
     virtual void loadmap() override;
     virtual void loadplayer() override;

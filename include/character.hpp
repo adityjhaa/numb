@@ -12,7 +12,7 @@ protected:
 
     Textures texture;
     Rectangle rec;
-    Vector2 pos, vel, lastframe;
+    Vector2 pos, vel{}, lastframe;
     float xpos{}, ypos{};
     int frame, maxframes{11};
     std::pair<bool, bool> shouldstay{};
