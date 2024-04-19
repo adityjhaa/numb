@@ -96,24 +96,26 @@ void Home::entries()
 
     if (player->pos.x > 600.f and player->pos.x < 800.f and currmap > 0)
     {
-        DrawText("Level 2: <ENTER>", 30.f, 25.f, 60, WHITE);
+        DrawText("Level 2 : <ENTER>", 30.f, 25.f, 60, WHITE);
         pressed = 2;
         return;
     }
 
     if (player->pos.x > 1000.f and player->pos.x < 1200.f and currmap > 1)
     {
-        DrawText("Level 3: <ENTER>", 30.f, 25.f, 60, WHITE);
+        DrawText("Level 3 : <ENTER>", 30.f, 25.f, 60, WHITE);
         pressed = 3;
         return;
     }
 
     if (player->pos.x > 1400.f and player->pos.x < 1600.f and currmap > 2)
     {
-        DrawText("Level 4: <ENTER>", 30.f, 25.f, 60, WHITE);
+        DrawText("Level 4 : <ENTER>", 30.f, 25.f, 60, WHITE);
         pressed = 4;
         return;
     }
+
+    DrawText("Menu : <P>", 30.f, 25.f, 60, WHITE);
 
     pressed = 0;
 }

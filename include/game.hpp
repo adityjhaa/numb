@@ -4,6 +4,7 @@
 #include "lvl1.hpp"
 #include "lvl2.hpp"
 #include "lvl3.hpp"
+#include "lvl4.hpp"
 #include "home.hpp"
 #include "menu.hpp"
 
@@ -14,6 +15,7 @@ class Game
     Level1 *lvl1;
     Level2 *lvl2;
     Level3 *lvl3;
+    Level4 *lvl4;
     int currLevel;
     bool mute{}, tut{};
 

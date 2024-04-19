@@ -7,7 +7,6 @@ Game::Game()
 
 Game::~Game()
 {
-    
 }
 
 void Game::init(int width, int height, const char *title)
@@ -44,13 +43,14 @@ void Game::begin()
 
 void Game::update(float dt)
 {
-    if(tut)
+    if (tut)
     {
         DrawTexture(tutorial.getTexture(), 0, 0, WHITE);
-        if(IsKeyPressed(KEY_T)){
+        if (IsKeyPressed(KEY_T))
+        {
             tut = false;
             tutorial.unload();
-    }
+        }
         return;
     }
     switch (currLevel)
@@ -98,7 +98,7 @@ void Game::update(float dt)
                 lvl3 = new Level3();
                 break;
             case 4:
-                // lvl4 = new Level4();
+                lvl4 = new Level4();
                 break;
             default:
                 break;
@@ -177,20 +177,12 @@ void Game::update(float dt)
 
         break;
     case 4:
-        // if (instruction[3])
-        // {
-        //     lvl4->instr();
-        //     if (IsKeyPressed(KEY_SPACE))
-        //         instruction[3] = false;
-
-        //     return;
-        // }
-        // lvl4->render();
-        // lvl4->update(dt);
-        // if (lvl4->complete())
-        // {
-        //     currLevel = 0;
-        // }
+         lvl4->render();
+        if (lvl4->complete())
+        {
+            currLevel = 0;
+            delete lvl4;
+        }
 
         break;
     default:
