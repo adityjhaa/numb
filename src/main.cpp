@@ -24,6 +24,8 @@ int main(int argc, const char *argv[])
     SetTargetFPS(60);
     while (!exitWindow)
     {
+        float dt = GetFrameTime();
+        game.begin();
         if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) || game.exit)
             exitWindowRequest = true;
         if (exitWindowRequest)
@@ -37,7 +39,6 @@ int main(int argc, const char *argv[])
             }
         }
 
-        game.begin();
 
         if (exitWindowRequest)
         {
@@ -45,7 +46,6 @@ int main(int argc, const char *argv[])
         }
         else
         {
-            float dt = GetFrameTime();
             game.update(dt);
         }
         game.end();

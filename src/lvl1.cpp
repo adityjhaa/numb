@@ -34,9 +34,6 @@ void Level1::updatechar(float dt)
         first = false;
     }
 
-    if (first)
-        DrawText("<SPACE>", 780.f, 300.f, 80, LIGHTGRAY);
-
     player->lastframe = player->pos;
     if (IsKeyDown(KEY_A))
         player->vel.x = -1.0;

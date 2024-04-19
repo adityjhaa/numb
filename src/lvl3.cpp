@@ -15,6 +15,7 @@ Level3::Level3()
 Level3::~Level3()
 {
     instpage.unload();
+    instpage2.unload();
     unloadprops();
     player = nullptr;
     map = map1 = map2 = nullptr;
@@ -248,7 +249,7 @@ void Level3::update(float dt)
     player->rec = Rectangle{player->pos.x + 20.f - camx, player->pos.y + 20.f, 88.f, 108.f};
 
     {
-        if (IsKeyPressed(KEY_ENTER) and CheckCollisionRecs(player->rec, colliders[0]) and firstm)
+        if (IsKeyPressed(KEY_S) and CheckCollisionRecs(player->rec, colliders[0]) and firstm)
             opendoor = true;
         if (opendoor and (frame_cnt % 4 == 0))
             rdoor.frame++;
@@ -325,12 +326,19 @@ bool Level3::complete()
 
 void Level3::loadinstr()
 {
-    instpage.load("assets/pages/instr3.png");
+    instpage.load("assets/pages/instr31.png");
+    instpage2.load("assets/pages/instr32.png");
 }
 
 void Level3::instr()
 {
-    DrawTexture(instpage.getTexture(), 0, 0, WHITE);
+    if (IsKeyPressed(KEY_RIGHT))
+        instr2 = true;
+
+    if (!instr2)
+        DrawTexture(instpage.getTexture(), 0, 0, WHITE);
+    else
+        DrawTexture(instpage2.getTexture(), 0, 0, WHITE);
 }
 
 void Level3::loadprops()

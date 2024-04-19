@@ -77,9 +77,10 @@ class Level3 : public Level
     Map *map1, *map2;
     std::vector<std::pair<Enemy *, bool>> enemies;
     Sound s;
+    Textures instpage2;
 
     int frame_cnt{}, fall_frame{}, frame3{}, jumpCount{0}, stairs{}, health{3}, hitcnt{};
-    bool firstm{true}, opendoor{}, dooropen{}, enter{}, jump{}, phit{}, ehit{}, lose{};
+    bool firstm{true}, opendoor{}, dooropen{}, enter{}, jump{}, phit{}, ehit{}, lose{}, instr2{};
 
     std::vector<Torch> ftorches;
     std::vector<Torch> storches;

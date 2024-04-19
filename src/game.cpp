@@ -7,11 +7,7 @@ Game::Game()
 
 Game::~Game()
 {
-    menu = nullptr;
-    home = nullptr;
-    lvl1 = nullptr;
-    lvl2 = nullptr;
-    lvl3 = nullptr;
+    
 }
 
 void Game::init(int width, int height, const char *title)
@@ -36,7 +32,6 @@ void Game::startscreen()
         EndDrawing();
     }
     startsc.unload();
-    lvl3=new Level3();
     menu = new Menu();
     home = new Home();
 }
@@ -49,6 +44,15 @@ void Game::begin()
 
 void Game::update(float dt)
 {
+    if(tut)
+    {
+        DrawTexture(tutorial.getTexture(), 0, 0, WHITE);
+        if(IsKeyPressed(KEY_T)){
+            tut = false;
+            tutorial.unload();
+    }
+        return;
+    }
     switch (currLevel)
     {
     case -1:
@@ -61,7 +65,8 @@ void Game::update(float dt)
         }
         else if (IsKeyPressed(KEY_T))
         {
-            // turtorial
+            tut = true;
+            tutorial.load("assets/pages/tutorial.png");
         }
         else if (IsKeyPressed(KEY_E))
         {
@@ -147,14 +152,14 @@ void Game::update(float dt)
 
         break;
     case 3:
-        // if (instruction[2])
-        // {
-        //     lvl3->instr();
-        //     if (IsKeyPressed(KEY_SPACE))
-        //         instruction[2] = false;
+        if (instruction[2])
+        {
+            lvl3->instr();
+            if (IsKeyPressed(KEY_SPACE))
+                instruction[2] = false;
 
-        //     return;
-        // }
+            return;
+        }
         lvl3->render();
         lvl3->update(dt);
         if (lvl3->complete())
@@ -164,7 +169,7 @@ void Game::update(float dt)
             currLevel = 0;
             delete lvl3;
         }
-        if (lvl3->incomplete())
+        else if (lvl3->incomplete())
         {
             currLevel = 0;
             delete lvl3;

@@ -15,7 +15,9 @@ class Game
     Level2 *lvl2;
     Level3 *lvl3;
     int currLevel;
-    bool mute{};
+    bool mute{}, tut{};
+
+    Textures tutorial;
 
     bool instruction[4] = {true, true, true, true};
 
