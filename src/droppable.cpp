@@ -9,7 +9,7 @@ char *texturesPath[4] = {(char *)"assets/drops/Instagram.png",
 Droppable::Droppable()
 {
     texture;
-    incrY = 4.f;
+    incrY = 6.f;
     dropsList;
 }
 
