@@ -78,6 +78,7 @@ class Level3 : public Level
     std::vector<std::pair<Enemy *, bool>> enemies;
     Sound s;
     Textures instpage2;
+    Textures heal;
 
     int frame_cnt{}, fall_frame{}, frame3{}, jumpCount{0}, stairs{}, health{3}, hitcnt{};
     bool firstm{true}, opendoor{}, dooropen{}, enter{}, jump{}, phit{}, ehit{}, lose{}, instr2{};

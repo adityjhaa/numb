@@ -43,6 +43,7 @@ void Level3::loadmap()
 {
     map1 = new Map("assets/maps/map31.png", 4.f);
     map2 = new Map("assets/maps/map32.png", 4.f);
+    heal.load("assets/drops/health.png");
 }
 
 void Level3::addcolliders()
@@ -239,6 +240,9 @@ void Level3::render()
 
         DrawTexturePro(fountain.tex, Rectangle{(frame3 % 2) * 24.f, (frame3 / 2) * 24.f, 24.f, 24.f}, Rectangle{fountain.pos.x, fountain.pos.y, 144.f, 144.f}, Vector2{camx, camy}, 0.f, WHITE);
     }
+
+    for (int i = 0; i < health; i++)
+        DrawTexture(heal.getTexture(), 20.f + i * 120.f, 20.f, WHITE);
 }
 
 void Level3::update(float dt)
@@ -301,8 +305,11 @@ void Level3::update(float dt)
         fall_frame %= 9;
     }
 
-    updateenemies(dt);
-    updatechar(dt);
+    if (!lose)
+    {
+        updateenemies(dt);
+        updatechar(dt);
+    }
 
     if (firstm)
     {
