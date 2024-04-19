@@ -8,6 +8,8 @@ Home::Home()
 
 Home::~Home()
 {
+    delete player;
+    delete map;
     player = nullptr;
     map = nullptr;
     unloadmaps();

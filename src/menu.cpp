@@ -16,4 +16,3 @@ void Menu::render()
 {
     DrawTexture(tex.getTexture(), 0, 0, WHITE);
 }
-

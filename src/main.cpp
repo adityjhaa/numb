@@ -25,6 +25,7 @@ int main(int argc, const char *argv[])
     while (!exitWindow)
     {
         float dt = GetFrameTime();
+
         game.begin();
         if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE) || game.exit)
             exitWindowRequest = true;
@@ -39,7 +40,6 @@ int main(int argc, const char *argv[])
             }
         }
 
-
         if (exitWindowRequest)
         {
             DrawTexture(exitsc.getTexture(), 0, 0, WHITE);
@@ -51,8 +51,8 @@ int main(int argc, const char *argv[])
         game.end();
     }
     exitsc.unload();
-    game.close();
     CloseAudioDevice();
+    game.close();
 
     return 0;
 }

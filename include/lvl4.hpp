@@ -8,6 +8,7 @@ class Level4
     std::vector<Textures> pages;
     int curr{0};
     bool done{};
+
 public:
     Level4();
     ~Level4();

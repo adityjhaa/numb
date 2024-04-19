@@ -12,6 +12,8 @@ Level1::Level1()
 Level1::~Level1()
 {
     instpage.unload();
+    delete player;
+    delete map;
     player = nullptr;
     map = nullptr;
     UnloadSound(s);

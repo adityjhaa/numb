@@ -32,4 +32,3 @@ bool Level4::complete()
 {
     return done;
 }
-

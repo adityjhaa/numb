@@ -31,8 +31,8 @@ void Game::startscreen()
         EndDrawing();
     }
     startsc.unload();
-    menu = new Menu();
     home = new Home();
+    menu = new Menu();
 }
 
 void Game::begin()
@@ -177,7 +177,7 @@ void Game::update(float dt)
 
         break;
     case 4:
-         lvl4->render();
+        lvl4->render();
         if (lvl4->complete())
         {
             currLevel = 0;

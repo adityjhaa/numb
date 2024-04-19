@@ -21,6 +21,8 @@ Level2::Level2()
 
 Level2::~Level2()
 {
+    delete player;
+    delete map;
     player = nullptr;
     map = nullptr;
 }

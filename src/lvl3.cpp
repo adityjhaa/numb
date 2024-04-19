@@ -17,11 +17,15 @@ Level3::~Level3()
     instpage.unload();
     instpage2.unload();
     unloadprops();
+    delete player;
     player = nullptr;
+    delete map1;
+    delete map2;
     map = map1 = map2 = nullptr;
     UnloadSound(s);
     for (auto e : enemies)
     {
+        delete e.first;
         e.first = nullptr;
     }
 }
