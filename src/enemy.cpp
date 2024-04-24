@@ -1,4 +1,4 @@
-#include "../include/enemy.hpp"
+#include "include/enemy.hpp"
 
 Enemy::Enemy()
 {

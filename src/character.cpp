@@ -1,4 +1,4 @@
-#include "../include/character.hpp"
+#include "include/character.hpp"
 
 Character::Character() { texture = idle; }
 

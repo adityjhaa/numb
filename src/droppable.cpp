@@ -1,4 +1,4 @@
-#include "../include/droppable.hpp"
+#include "include/droppable.hpp"
 #define TEXTURE_SIZE 32
 
 char *texturesPath[4] = {(char *)"assets/drops/Instagram.png",

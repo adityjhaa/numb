@@ -1,4 +1,4 @@
-#include "../include/game.hpp"
+#include "include/game.hpp"
 
 // Window Attributes
 const int WIDTH = 1920;

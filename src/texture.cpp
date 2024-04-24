@@ -1,4 +1,4 @@
-#include "../include/texture.hpp"
+#include "include/texture.hpp"
 
 Textures::Textures() {}
 

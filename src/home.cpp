@@ -1,4 +1,4 @@
-#include "../include/home.hpp"
+#include "include/home.hpp"
 
 Home::Home()
 {

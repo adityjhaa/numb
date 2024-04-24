@@ -1,4 +1,4 @@
-#include "../include/floor.hpp"
+#include "include/floor.hpp"
 #define LEVEL 4
 #define TEXTURE_SIZE 64
 
