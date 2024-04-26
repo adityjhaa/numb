@@ -6,7 +6,7 @@ CCBUILDFLAGS := -o
 RFLAGS := -lraylib
 
 SRC_PATH := src
-INC_PATH := include
+INC_PATH := src/include
 
 TARGET_NAME := game
 
