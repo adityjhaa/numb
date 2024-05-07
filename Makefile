@@ -23,11 +23,12 @@ TARGET := $(TARGET_NAME)
 all: $(TARGET)
 
 $(TARGET): $(SRC) $(INC)
-	$(CXX) $(CCBUILDFLAGS) $@ $(SRC) $(RFLAGS)
+	@$(CXX) $(CCBUILDFLAGS) $@ $(SRC) $(RFLAGS)
+	@echo "Built Successfully!"
 
 .PHONY: run
 run: all
-	./$(TARGET)
+	@./$(TARGET)
 
 clean:
 	rm -f $(TARGET)
