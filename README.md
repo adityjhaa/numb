@@ -9,12 +9,20 @@ git clone https://github.com/adityjha0/numb.git
 
 **Install Raylib**
 
-*Linux*
+*Ubuntu Linux*
 ```bash
 cp install.sh ~
 cd
 chmod +x install.sh
 ./install.sh
+```
+
+
+*Arch Linux*
+```bash
+cd
+sudo pacman -Sy
+sudo pacman -S raylib
 ```
 
 *Mac*
