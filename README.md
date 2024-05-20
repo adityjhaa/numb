@@ -1,13 +1,14 @@
 # NUMB
 <hr>
 
-**Clone Repo**
+## Clone Repo
 ```bash
 git clone https://github.com/adityjha0/numb.git
 ```
+
 <br>
 
-**Install Raylib**
+## Install Raylib
 
 *Ubuntu Linux*
 ```bash
@@ -34,7 +35,7 @@ brew install raylib
 
 <br>
 
-**Build and run**
+## Build and run
 ```bash
 make run
 ```
