@@ -25,6 +25,8 @@ sudo pacman -Sy
 sudo pacman -S raylib
 ```
 
+For other Linux distributions, the installation process is documented <a href="https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux">here</a>.
+
 *Mac*
 ```bash
 brew install raylib
